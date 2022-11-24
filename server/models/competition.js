@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const competionsSchema = mongoose.Schema({
+    _id: Schema.Types.ObjectId,
     productName: String,
     productBrand: String,
     ticketPrice: Number,
@@ -9,8 +10,8 @@ const competionsSchema = mongoose.Schema({
     numTicketSolds: Number,
     deadline: Date,
     tickets: [{
-            ticketNumber: Number,
-            ticketOwner: String
+            number: Number,
+            owner: {type: Schema.Types.ObjectId, ref:'User'}
         }]
 });
 
