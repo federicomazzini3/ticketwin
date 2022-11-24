@@ -11,7 +11,9 @@ const competionsSchema = mongoose.Schema({
     deadline: Date,
     tickets: [{
             number: Number,
-            owner: {type: Schema.Types.ObjectId, ref:'User'}
+            owner: {
+                type: Schema.Types.ObjectId, 
+                ref:'User'}
         }]
 });
 

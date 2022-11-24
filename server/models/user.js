@@ -4,13 +4,16 @@ const userSchema = mongoose.Schema({
     _id: Schema.Types.ObjectId,
     name: String,
     surname: String,
-    //altro da definire
+    email:String,
+    password: String,
     tickets: [{
             number: Number,
             productName: String,
             productBrand: String,
             price: Number,
-            competition: {type: Schema.Types.ObjectId, ref:'Competition'}
+            competition: {
+                type: Schema.Types.ObjectId, 
+                ref:'Competition'}
         }]
 });
 
