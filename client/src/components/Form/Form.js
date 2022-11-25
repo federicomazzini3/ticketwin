@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import useStyles from './styles'
-import { TextField, Button, Typography, Paper } from '@material-ui/core'
-import { DateTimePicker, LocalizationProvider } from '@material-ui/pickers'
+import useStyles from './styles';
+import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { mergeClasses } from "@material-ui/styles";
 import FileBase from 'react-file-base64';
 //productName: String, productBrand: String, ticketPrice: Number, productPrice: Number, maxTicketNumber: Number, deadline: Date,
