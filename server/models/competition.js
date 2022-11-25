@@ -7,8 +7,8 @@ const competionsSchema = mongoose.Schema({
     ticketPrice: Number,
     productPrice: Number,
     maxTicketNumber: Number,
-    numTicketSolds: Number,
     deadline: Date,
+    images: [Buffer],
     tickets: [{
             number: Number,
             owner: {

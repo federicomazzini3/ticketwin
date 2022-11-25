@@ -14,7 +14,7 @@ app.use(cors());
 app.use('/competitions', competitionsRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://TicketWin:TicketWin@cluster0.jiyqo4v.mongodb.net/?retryWrites=true&w=majority';
-const PORT = process.env.PORT|| 5001;
+const PORT = process.env.PORT|| 4000;
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
