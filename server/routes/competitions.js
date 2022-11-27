@@ -4,6 +4,6 @@ import { getCompetitions, createCompetition} from '../controllers/competitions.j
 const router = express.Router();
 
 router.get('/', getCompetitions);
-router.get('/', createCompetition);
+router.post('/', createCompetition);
 
 export default router;

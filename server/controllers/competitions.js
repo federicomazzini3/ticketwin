@@ -17,5 +17,6 @@ export const createCompetition = async (req, res) => {
         res.status(201).json(newCompetition);
     } catch (err) {
         res.status(409).json({message: err.message, error: err})
+        console.log(err.message)
     }
 }

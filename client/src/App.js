@@ -20,10 +20,10 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-        <AppBar position="static" color="inherit">
+        <AppBar position="static" color="primary">
           <Toolbar>
           <CameraIcon sx={{ mr: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap> TickeWin </Typography>
+          <Typography variant="h6" color="inherit" noWrap> TicketWin </Typography>
           </Toolbar>
         </AppBar>
         <main>

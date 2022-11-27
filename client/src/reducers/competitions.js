@@ -3,7 +3,7 @@ export default (competitions = [], action) => {
         case 'FETCH_ALL':
             return action.payload;
         case 'CREATE':
-            return competitions;
+            return [...competitions, action.payload];
         default:
             return competitions;
     }
