@@ -9,7 +9,7 @@ export default (competitions = [], action) => {
         case UPDATE:
             return competitions.map((competition) => competition._id === action.payload._id ? action.payload : competition)
         case DELETE:
-            return competitions.filter((competition) => competition._id !=action.payload)
+            return competitions.filter((competition) => competition._id !== action.payload)
         default:
             return competitions;
     }

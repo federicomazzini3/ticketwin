@@ -1,10 +1,8 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, Box } from "@mui/material"
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { Card, CardContent, CardMedia, Button, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import moment from 'moment';
-import Competitions from "../Competitions";
 import { useDispatch } from "react-redux";
 import { deleteCompetition } from "../../../actions/competitions";
 
