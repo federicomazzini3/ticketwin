@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, AppBar, Typography, Grow, Grid, Toolbar, Box, Stack, Button } from "@mui/material";
 import CameraIcon from '@mui/icons-material/PhotoCamera';
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ import { ThemeProvider } from "@mui/styles";
 const theme = createTheme();
 
 const App = () => {
+  const[currentId, setCurrentId] = useState(null)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,8 +47,8 @@ const App = () => {
         <Grow in>
           <Container>
             <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
-              <Grid item xs={12} sm={7}> <Competitions/> </Grid>
-              <Grid item xs={12} sm={4}> <Form/> </Grid>
+              <Grid item xs={12} sm={7}> <Competitions setCurrentId={setCurrentId}/> </Grid>
+              <Grid item xs={12} sm={4}> <Form currentId={currentId} setCurrentId={setCurrentId}/> </Grid>
             </Grid>
           </Container>
         </Grow>

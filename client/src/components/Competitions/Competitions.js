@@ -3,7 +3,7 @@ import { Grid, CircularProgress } from "@mui/material"
 import { useSelector } from "react-redux";
 import Competition from "./Competition/Competition";
 
-const Competitions = () => {
+const Competitions = ({setCurrentId}) => {
     const competitions = useSelector((state) => state.competitions); //from reducers
 
     console.log(competitions);
@@ -12,7 +12,7 @@ const Competitions = () => {
             <Grid container alignItems="stretch" spacing={3}>
                 {competitions.map((competition) => (
                     <Grid  key={competition._id} item xs={12} sm={6}>
-                        <Competition competition={competition}></Competition>
+                        <Competition competition={competition} setCurrentId={setCurrentId}></Competition>
                     </Grid>
                 ))}
             </Grid>

@@ -1,26 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Box } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useDispatch } from 'react-redux';
-import { createCompetition } from "../../actions/competitions";
-
+import { createCompetition, updateCompetition } from "../../actions/competitions";
+import { useSelector } from "react-redux";
 
 //productName: String, productBrand: String, ticketPrice: Number, productPrice: Number, maxTicketNumber: Number, deadline: Date,
-const Form = () => {
+const Form = ({currentId, setCurrentId}) => {
     const [competitionData, setCompetitionData] = useState({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' });
+    const competition = useSelector((state) => currentId ? state.competitions.find((c) => c._id === currentId): null );
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(competition) setCompetitionData(competition)
+    }, [competition])
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        dispatch(createCompetition(competitionData))
+        if(currentId){
+            dispatch(updateCompetition(currentId, competitionData));
+        } else {
+            dispatch(createCompetition(competitionData))
+        }
+        clear();
     }
 
     const clear = () => {
-
+        setCurrentId(null);
+        setCompetitionData({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' })
     }
 
 
