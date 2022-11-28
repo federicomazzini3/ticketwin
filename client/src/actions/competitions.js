@@ -1,6 +1,5 @@
 import * as api from '../api';
-import {FETCH_ALL, CREATE, UPDATE, DELETE} from '../constants/actionType';
-//import competitions from '../reducers/competitions';
+import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE} from '../constants/actionType';
 
 //Action Creators => functions that returns actions
 
@@ -8,6 +7,15 @@ export const getCompetitions = () => async (dispatch) => {
     try{
         const { data } = await api.fetchCompetitions();
         dispatch({type: FETCH_ALL, payload: data});
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+
+export const getCompetition = (id) => async (dispatch) => {
+    try{
+        const { data } = await api.fetchCompetition(id);
+        dispatch({type: FETCH_COMPETITION, payload: data});
     } catch (err) {
         console.log(err.message)
     }

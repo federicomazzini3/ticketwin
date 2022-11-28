@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 //productName: String, productBrand: String, ticketPrice: Number, productPrice: Number, maxTicketNumber: Number, deadline: Date,
 const Form = ({currentId, setCurrentId}) => {
     const [competitionData, setCompetitionData] = useState({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' });
-    const competition = useSelector((state) => currentId ? state.competitions.find((c) => c._id === currentId): null );
+    const competition = useSelector((state) => currentId ? state.competitions.competitions.find((c) => c._id === currentId): null );
     const dispatch = useDispatch();
 
     useEffect(() => {

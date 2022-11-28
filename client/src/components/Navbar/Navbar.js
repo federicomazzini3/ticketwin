@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppBar, Typography, Toolbar, Link, Button} from '@mui/material'
+import { AppBar, Typography, Toolbar, Link, Button, Switch} from '@mui/material'
 
-const Navbar = () => {
+const Navbar = ({mode, setMode}) => {
   const user = null;
   return (
       <AppBar position="static" color="default" elevation={0} sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}>
@@ -10,8 +10,9 @@ const Navbar = () => {
             TicketWin
           </Typography>
           <nav>
+
+            <Switch onChange={e => setMode(mode === "light" ? "dark" : "light")}  sx={{ my: 1, mx: 1.5 }}/>
             <Link variant="button" color="text.primary" href="/competitions" sx={{ my: 1, mx: 1.5 }}>Competitions</Link>
-            <Link variant="button" color="text.primary" href="/about" sx={{ my: 1, mx: 1.5 }}>About</Link>
           </nav>
           {user ? (
             <Button component={Link} href="/user" variant="outlined" sx={{ my: 1, mx: 1.5 }}>{user.result.name}</Button>
