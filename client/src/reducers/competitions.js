@@ -1,16 +1,18 @@
-import {FETCH_ALL, CREATE, UPDATE, DELETE} from '../constants/actionType';
+import {FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_COMPETITION} from '../constants/actionType';
 
-export default (competitions = [], action) => {
+export default (state = {competitions: []}, action) => {
     switch (action.type) {
         case FETCH_ALL:
-            return action.payload;
+            return {...state, competitions: action.payload};
+        case FETCH_COMPETITION:
+                return {...state, competition: action.payload};
         case CREATE:
-            return [...competitions, action.payload];
+            return {...state, competitions: [...state.competitions, action.payload]};
         case UPDATE:
-            return competitions.map((competition) => competition._id === action.payload._id ? action.payload : competition)
+            return {...state, competitions: state.competitions.map((competition) => competition._id === action.payload._id ? action.payload : competition)}
         case DELETE:
-            return competitions.filter((competition) => competition._id !== action.payload)
+            return {...state, competitions: state.competitions.filter((competition) => competition._id !== action.payload)}
         default:
-            return competitions;
+            return state;
     }
 }

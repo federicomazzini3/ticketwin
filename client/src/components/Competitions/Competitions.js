@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Competition from "./Competition/Competition";
 
 const Competitions = ({setCurrentId}) => {
-    const competitions = useSelector((state) => state.competitions); //from reducers
+    const {competitions} = useSelector((state) => state.competitions); //from reducers
 
     console.log(competitions);
     return (

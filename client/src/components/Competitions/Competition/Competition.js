@@ -1,16 +1,21 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Button, Typography } from "@mui/material"
+import { Card, CardContent, CardMedia, Button, Typography, ButtonBase } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from "react-redux";
 import { deleteCompetition } from "../../../actions/competitions";
+import {useHistory} from 'react-router-dom'
 
 const Competition = ({ competition, setCurrentId }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const openCompetition = () => history.push("/competitions/" + competition._id)
     return (
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
+            <ButtonBase onClick={openCompetition}>
             <CardMedia component="img" image={competition.image || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt="random" />
+            </ButtonBase>
             <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h4" component="h2">
                     {competition.productName}
