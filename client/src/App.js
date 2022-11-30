@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import DebugCompetitionForm from "./components/DebugCompetitionForm/DebugCompetitionForm";
 import Auth from "./components/Auth/Auth";
 import DetailsCompetition from "./components/DetailsCompetition/DetailsCompetition"
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
 
@@ -23,13 +24,14 @@ const App = () => {
       <CssBaseline>
         <BrowserRouter>
           <Box bgcolor={"background.default"} color={"text.primary"}>
-            <Navbar mode={mode} setMode={setMode}/>
+            <Navbar/>
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/competitions" exact component={DebugCompetitionForm} />
               <Route path="/competitions/:id"  component={DetailsCompetition} />
               <Route path="/auth" exact component={Auth} />
             </Switch>
+            <Footer mode={mode} setMode={setMode}/>
           </Box>
         </BrowserRouter>
       </CssBaseline>
