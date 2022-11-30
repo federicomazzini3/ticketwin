@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button } from '@mui/material';
+import { AppBar, Typography, Toolbar, Avatar, Button, Switch } from '@mui/material';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
@@ -9,7 +9,7 @@ import ticketWinText from '../../images/JLS.jpg';
 import * as actionType from '../../constants/actionType';
 import useStyles from './styles';
 
-const Navbar = () => {
+const Navbar = ({mode, setMode}) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const location = useLocation();
@@ -38,11 +38,13 @@ const Navbar = () => {
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
-      <Link to="/" className={classes.brandContainer}>
-        <img component={Link} to="/" src={ticketWinText} alt="icon" height="45px" />
-        <img className={classes.image} src={ticketWinLogo} alt="icon" height="40px" />
-      </Link>
+      <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }} component={Link} to="/">
+        TicketWin
+      </Typography>
       <Toolbar className={classes.toolbar}>
+
+      <Switch onChange={e => setMode(mode === "light" ? "dark" : "light")} sx={{ my: 1, mx: 1.5 }} />
+      <Link variant="button" color="text.primary" to="/competitions" sx={{ my: 1, mx: 1.5, lm:2}}>Competitions</Link>
         {user?.result ? (
           <div className={classes.profile}>
             <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
