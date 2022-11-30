@@ -1,9 +1,20 @@
-import axios from 'axios';
+import API from 'axios';
+import { signin } from '../controllers/user';
 
-const url = 'http://localhost:4000/competitions'
+const API = axios.create({ baseURL: 'http://localhost:5000' })
 
-export const fetchCompetitions = () => axios.get(url);
-export const createCompetition = (competition) => axios.post(url, competition)
-export const fetchCompetition = (id) => axios.get(`${url}/${id}`)
-export const updateCompetition = (id, updatedCompetition) => axios.patch(`${url}/${id}`, updatedCompetition)
-export const deleteCompetition = (id) => axios.delete(`${url}/${id}`);
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem('profile')) {
+      req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    }
+  
+    return req;
+  });
+
+export const fetchCompetition = () => API.get('/competitions');
+export const createCompetition = (newCompetition) => API.competition('/competitions', newCompetition);
+export const updateCompetition = (id, updateCompetition) => API.patch(`/competitions/${id}`, updateCompetition);
+export const deleteCompetition = (id) => API.delete(`/competitions/${id}`);
+
+export const signIn = (formData) => API.competition('/user/signin', formData);
+export const signUp = (formData) => API.competition('/user/signup', formData);
