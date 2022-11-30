@@ -7,14 +7,19 @@ import { useDispatch } from "react-redux";
 import { deleteCompetition } from "../../../actions/competitions";
 import {useHistory} from 'react-router-dom'
 
+import useStyles from './styles';
+
+
 const Competition = ({ competition, setCurrentId }) => {
+
+    const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
     const openCompetition = () => history.push("/competitions/" + competition._id)
     return (
-        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
+        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <ButtonBase onClick={openCompetition}>
-            <CardMedia component="img" image={competition.image || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt="random" />
+            <CardMedia height="220" component="img" image={competition.image || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt="random" />
             </ButtonBase>
             <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h4" component="h2">
@@ -26,8 +31,8 @@ const Competition = ({ competition, setCurrentId }) => {
                 <Typography> {competition.ticketPrice}$</Typography>
                 <Typography> {competition.maxTicketNumber - competition.tickets.length} ticket rimasti</Typography>
                 <Typography> {moment(competition.deadline).fromNow(false)}</Typography>
-                <Button size="small" color="primary" onClick={() => setCurrentId(competition._id)}><MoreHorizIcon fontSize="small"/> Edit</Button>
-                <Button size="small" color="primary" onClick={() => dispatch(deleteCompetition(competition._id))}><DeleteIcon fontSize="small"/> Delete</Button>
+                {/*<Button size="small" color="primary" onClick={() => setCurrentId(competition._id)}><MoreHorizIcon fontSize="small"/> Edit</Button>
+                <Button size="small" color="primary" onClick={() => dispatch(deleteCompetition(competition._id))}><DeleteIcon fontSize="small"/> Delete</Button>*/}
             </CardContent>
         </Card>
     )

@@ -4,10 +4,11 @@ import { BrowserRouter, Switch, Route } from "react-router-dom"
 import { Box, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
-import DebugCompetitionForm from "./components/DebugCompetitionForm/DebugCompetitionForm";
 import Auth from "./components/Auth/Auth";
 import DetailsCompetition from "./components/DetailsCompetition/DetailsCompetition"
 import Footer from "./components/Footer/Footer";
+import Competitions from "./components/Competitions/Competitions";
+import Form from "./components/Form/Form";
 
 const App = () => {
 
@@ -27,7 +28,8 @@ const App = () => {
             <Navbar/>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/competitions" exact component={DebugCompetitionForm} />
+              <Route path="/competitions" exact component={Competitions} />
+              <Route path="/addCompetition" exact component={Form} />
               <Route path="/competitions/:id"  component={DetailsCompetition} />
               <Route path="/auth" exact component={Auth} />
             </Switch>
