@@ -9,10 +9,13 @@ import DetailsCompetition from "./components/DetailsCompetition/DetailsCompetiti
 import Footer from "./components/Footer/Footer";
 import Competitions from "./components/Competitions/Competitions";
 import Form from "./components/Form/Form";
+import { useSelector } from "react-redux";
 
 const App = () => {
 
-  const [mode, setMode] = useState("light");
+  const [mode2, setMode] = useState("light");
+
+  const {mode} = useSelector((state) => state.mode); //from reducers
 
   const darkTheme = createTheme({
     palette: {
