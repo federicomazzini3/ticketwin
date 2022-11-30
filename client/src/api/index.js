@@ -1,7 +1,7 @@
-import API from 'axios';
-import { signin } from '../controllers/user';
+//import { signin } from '../controllers/user';
+import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5000' })
+const API = axios.create({ baseURL: 'http://localhost:4000' })
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
@@ -11,10 +11,12 @@ API.interceptors.request.use((req) => {
     return req;
   });
 
-export const fetchCompetition = () => API.get('/competitions');
-export const createCompetition = (newCompetition) => API.competition('/competitions', newCompetition);
+
+export const fetchCompetitions = () => API.get('/competitions');
+export const fetchCompetition = (id) => API.get(`/competitions/${id}`);
+export const createCompetition = (newCompetition) => API.post('/competitions', newCompetition);
 export const updateCompetition = (id, updateCompetition) => API.patch(`/competitions/${id}`, updateCompetition);
 export const deleteCompetition = (id) => API.delete(`/competitions/${id}`);
 
-export const signIn = (formData) => API.competition('/user/signin', formData);
-export const signUp = (formData) => API.competition('/user/signup', formData);
+export const signIn = (formData) => API.post('/user/signin', formData);
+export const signUp = (formData) => API.post('/user/signup', formData);

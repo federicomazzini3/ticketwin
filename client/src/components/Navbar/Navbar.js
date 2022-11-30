@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Avatar, Button } from '@mui/material';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
-import ticketWinLogo from '../../images/memoriesLogo.png';
-import ticketWinText from '../../images/memoriesText.png';
-import * as actionType from '../../constants/actionTypes';
+import ticketWinLogo from '../../images/JLS.jpg';
+import ticketWinText from '../../images/JLS.jpg';
+import * as actionType from '../../constants/actionType';
 import useStyles from './styles';
 
 const Navbar = () => {
