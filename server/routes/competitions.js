@@ -5,8 +5,8 @@ import auth from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/', getCompetitions);
+router.get('/:id', getCompetition);
 router.post('/', auth, createCompetition);
-router.get('/:id', auth, getCompetition);
 router.patch('/:id', auth, updateCompetition);
 router.delete('/:id', auth, deleteCompetition);
 
