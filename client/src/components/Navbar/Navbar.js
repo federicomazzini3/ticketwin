@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button, Switch, Box } from '@mui/material';
+import { AppBar, Typography, Toolbar, Avatar, Button, Box } from '@mui/material';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
-import ticketWinLogo from '../../images/JLS.jpg';
-import ticketWinText from '../../images/JLS.jpg';
 import * as actionType from '../../constants/actionType';
 import useStyles from './styles';
 
-const Navbar = ({ mode, setMode }) => {
+const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const location = useLocation();

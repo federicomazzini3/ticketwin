@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom"
-import { Box, createTheme, Stack, ThemeProvider, CssBaseline } from "@mui/material";
+import { Box, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import DebugCompetitionForm from "./components/DebugCompetitionForm/DebugCompetitionForm";
