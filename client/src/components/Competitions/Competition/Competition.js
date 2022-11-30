@@ -1,18 +1,12 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Button, Typography, ButtonBase } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from "react-redux";
-import { deleteCompetition } from "../../../actions/competitions";
 import {useHistory} from 'react-router-dom'
-
-import useStyles from './styles';
 
 
 const Competition = ({ competition, setCurrentId }) => {
 
-    const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
     const openCompetition = () => history.push("/competitions/" + competition._id)

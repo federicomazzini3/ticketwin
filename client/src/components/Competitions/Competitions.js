@@ -5,11 +5,9 @@ import Competition from "./Competition/Competition";
 import { getCompetitions } from '../../actions/competitions'
 import { useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
-import useStyles from './styles';
 
 
 const Competitions = () => {
-    const classes = useStyles();
     const {competitions} = useSelector((state) => state.competitions); //from reducers
 
     const[currentId, setCurrentId] = useState(null)
