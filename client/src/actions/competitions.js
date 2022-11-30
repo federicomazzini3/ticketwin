@@ -1,8 +1,6 @@
 import * as api from '../api';
 import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE} from '../constants/actionType';
 
-//Action Creators => functions that returns actions
-
 export const getCompetitions = () => async (dispatch) => {
     try{
         const { data } = await api.fetchCompetitions();
