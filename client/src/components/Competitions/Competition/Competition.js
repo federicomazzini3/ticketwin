@@ -7,7 +7,6 @@ import {useHistory} from 'react-router-dom'
 
 const Competition = ({ competition, setCurrentId }) => {
 
-    const dispatch = useDispatch();
     const history = useHistory();
     const openCompetition = () => history.push("/competitions/" + competition._id)
     return (

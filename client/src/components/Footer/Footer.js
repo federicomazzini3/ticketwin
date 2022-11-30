@@ -10,6 +10,7 @@ const Footer = ({ mode, setMode }) => {
                 mt: 8,
                 py: [3, 6],
             }}>
+                
             <Link onClick={e => setMode(mode === "light" ? "dark" : "light")}>
                 <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5 }}>
                     Switch to dark mode
@@ -18,6 +19,11 @@ const Footer = ({ mode, setMode }) => {
             <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
                 Switch to daltonic mode
             </Typography>
+            <Link href='/addcompetition'>
+            <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
+                [DEBUG] Add a new competition
+            </Typography>
+            </Link>
             <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
                 {'Copyright © '}
                 TicketWin
