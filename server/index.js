@@ -5,6 +5,9 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import competitionsRoutes from './routes/competitions.js'
 
+import postRoutes from './routes/competitions.js';
+import userRoutes from './routes/users.js';
+
 const app = express();
 dotenv.config();
 
@@ -14,6 +17,7 @@ app.use(cors());
 
 //routes
 app.use('/competitions', competitionsRoutes);
+app.use('/user', userRoutes);
 
 const PORT = process.env.PORT;
 const CONNECTION_URL = process.env.CONNECTION_URL
