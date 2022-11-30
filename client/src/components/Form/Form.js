@@ -7,36 +7,29 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useDispatch } from 'react-redux';
 import { createCompetition, updateCompetition } from "../../actions/competitions";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 //productName: String, productBrand: String, ticketPrice: Number, productPrice: Number, maxTicketNumber: Number, deadline: Date,
-const Form = ({currentId, setCurrentId}) => {
+const Form = () => {
     const [competitionData, setCompetitionData] = useState({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' });
-    const competition = useSelector((state) => currentId ? state.competitions.competitions.find((c) => c._id === currentId): null );
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        if(competition) setCompetitionData(competition)
-    }, [competition])
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(currentId){
-            dispatch(updateCompetition(currentId, competitionData));
-        } else {
-            dispatch(createCompetition(competitionData))
-        }
+        dispatch(createCompetition(competitionData, (id) => history.push(`/competitions/${id}`)))
+
         clear();
     }
 
     const clear = () => {
-        setCurrentId(null);
         setCompetitionData({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' })
     }
 
 
     return (
-            <Box>
+            <Box sx={{width:300, mt:3}} margin='auto'>
                 <form autoComplete="off" noValidate onSubmit={handleSubmit}>
                     <Typography variant='h6'>Create a competition</Typography>
                     <TextField sx={{mt:1}} name="productName" variant="outlined" label="Title" fullWidth value={competitionData.productName} onChange={(e) => setCompetitionData({ ...competitionData, productName: e.target.value })} />

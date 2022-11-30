@@ -21,10 +21,11 @@ export const getCompetition = (id) => async (dispatch) => {
     }
 }
 
-export const createCompetition = (competition) => async(dispatch) => {
+export const createCompetition = (competition, onSuccess) => async(dispatch) => {
     try {
         const { data } = await api.createCompetition(competition);
         dispatch({type: CREATE , payload:data})
+        onSuccess(data._id)
     } catch(err) {
         console.log(err.message)
     }  
