@@ -19,7 +19,7 @@ const Footer = ({ mode }) => {
 
             <Link onClick={() => mode === "light" ? setDarkMode(dispatch) : setLightMode(dispatch)} >
                 <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5 }}>
-                    Switch to dark mode
+                    Switch to {mode === "light" ? "dark" : "light"} mode
                 </Typography>
             </Link>
             <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>

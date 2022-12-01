@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { getCompetitionsBySearch } from '../../actions/competitions';
+import { getCompetitionsBySearch } from '../../../actions/competitions';
 import { Paper, AppBar, TextField, Button, Chip, Grid, Box } from '@mui/material';
 import { useHistory, useLocation } from 'react-router-dom';
 

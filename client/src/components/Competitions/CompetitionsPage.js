@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Competitions from './Competitions';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { getCompetitions, getCompetitionsBySearch } from '../../actions/competitions';
-import { borderRadius, Container, spacing } from '@mui/system';
-import Pagination from '../Pagination/Pagination'
-import { Paper, AppBar, TextField, Button, Chip, Grid, Box } from '@mui/material';
-import { useHistory, useLocation } from 'react-router-dom';
-import SearchBar from '../SearchBar/SearchBar';
+import { Container } from '@mui/system';
+import Pagination from './Pagination/Pagination'
+import { Paper } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import SearchBar from './SearchBar/SearchBar';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
