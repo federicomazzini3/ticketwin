@@ -14,7 +14,12 @@ export default (state = {isLoading: true, competitions: []}, action) => {
                 numberOfPages: action.payload.numberOfPages,
             };
         case SEARCH:
-            return {...state, competitions: action.payload};
+            return {
+                ...state, 
+                competitions: action.payload.data, 
+                currentPage: action.payload.currentPage,
+                numberOfPages: action.payload.numberOfPages,
+            };
         case FETCH_COMPETITION:
                 return {...state, competition: action.payload};
         case CREATE:

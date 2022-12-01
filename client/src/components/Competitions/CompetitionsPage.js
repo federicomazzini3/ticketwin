@@ -27,7 +27,7 @@ const CompetitionsPage = () => {
 
     const searchCompetitions = () => {
         if (search.trim()) {
-            dispatch(getCompetitionsBySearch(search))
+            dispatch(getCompetitionsBySearch(search, 1))
             history.push(`/competitions/search?searchQuery=${search || 'none' }`);
         } else {
             history.push('/competitions')

@@ -13,7 +13,7 @@ API.interceptors.request.use((req) => {
 
 
 export const fetchCompetitions = (page) => API.get(`/competitions?page=${page}`);
-export const fetchCompetitionsBySearch = (searchQuery) => API.get(`/competitions/search?searchQuery=${searchQuery || 'none'}`);
+export const fetchCompetitionsBySearch = (searchQuery, page) => API.get(`/competitions/search?searchQuery=${searchQuery || 'none'}&page=${page}`);
 export const fetchCompetition = (id) => API.get(`/competitions/${id}`);
 export const createCompetition = (newCompetition) => API.post('/competitions', newCompetition);
 export const updateCompetition = (id, updateCompetition) => API.patch(`/competitions/${id}`, updateCompetition);

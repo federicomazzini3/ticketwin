@@ -12,10 +12,10 @@ export const getCompetitions = (page) => async (dispatch) => {
     }
 }
  
-export const getCompetitionsBySearch = (searchQuery) => async (dispatch) => {
+export const getCompetitionsBySearch = (searchQuery,page) => async (dispatch) => {
     try{
         dispatch({type: START_LOADING});
-        const { data } = await api.fetchCompetitionsBySearch(searchQuery);
+        const { data } = await api.fetchCompetitionsBySearch(searchQuery, page);
         dispatch({type: SEARCH, payload: data});
         dispatch({type: END_LOADING});
     } catch (err) {
