@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', getCompetitions);
 router.get('/:id', getCompetition);
-router.post('/', createCompetition);
+router.post('/', auth, createCompetition);
 router.patch('/:id', auth, updateCompetition);
 router.delete('/:id', auth, deleteCompetition);
 

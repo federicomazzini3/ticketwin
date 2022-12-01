@@ -18,9 +18,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        dispatch(createCompetition(competitionData, (id) => history.push(`/competitions/${id}`)))
-
+        dispatch(createCompetition(competitionData, (id) => history.push(`/competitions/${id}`), (error) => alert(error)))
         clear();
     }
 
@@ -28,7 +26,7 @@ const Form = () => {
         setCompetitionData({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' })
     }
 
-    if (!user?.result?.name) {
+    /*if (!user?.result?.name) {
         return (
             <Paper elevation={3}>
                 <Typography variant="h6" align="center">
@@ -39,7 +37,7 @@ const Form = () => {
                 </Typography>
             </Paper>
         )
-    }
+    }*/
 
 
     return (
