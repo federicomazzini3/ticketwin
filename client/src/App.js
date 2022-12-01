@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom"
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import { Box, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
@@ -13,8 +13,7 @@ import CompetitionDetails from "./components/CompetitionDetails/CompetitionDetai
 
 const App = () => {
 
-  const [mode2, setMode] = useState("light");
-
+  const user = JSON.parse(localStorage.getItem('profile'))
   const {mode} = useSelector((state) => state.mode); //from reducers
 
   const darkTheme = createTheme({
@@ -32,11 +31,12 @@ const App = () => {
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/competitions" exact component={CompetitionsPage} />
+              <Route path="/competitions/search" exact component={CompetitionsPage} />
               <Route path="/addcompetition" exact component={Form} />
               <Route path="/competitions/:id"  component={CompetitionDetails} />
               <Route path="/auth" exact component={Auth} />
             </Switch>
-            <Footer mode={mode} setMode={setMode}/>
+            <Footer mode={mode}/>
           </Box>
         </BrowserRouter>
       </CssBaseline>

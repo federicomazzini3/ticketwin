@@ -5,7 +5,7 @@ import { setDarkMode, setLightMode } from '../../actions/mode'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 //onClick={e => setMode(mode === "light" ? "dark" : "light")}
-const Footer = ({mode}) => {
+const Footer = ({ mode }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -16,7 +16,7 @@ const Footer = ({mode}) => {
                 mt: 8,
                 py: [3, 6],
             }}>
-                
+
             <Link onClick={() => mode === "light" ? setDarkMode(dispatch) : setLightMode(dispatch)} >
                 <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5 }}>
                     Switch to dark mode
@@ -26,9 +26,9 @@ const Footer = ({mode}) => {
                 Switch to daltonic mode
             </Typography>
             <Link onClick={() => history.push('/addcompetition')}>
-            <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
-                [DEBUG] Add a new competition
-            </Typography>
+                <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
+                    [DEBUG] Add a new competition
+                </Typography>
             </Link>
             <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
                 {'Copyright © '}

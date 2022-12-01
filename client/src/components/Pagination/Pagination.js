@@ -1,6 +1,6 @@
 import React from 'react' 
 import {Pagination, PaginationItem} from '@mui/material'
-import Link from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const Paginate = () => {
   return (
