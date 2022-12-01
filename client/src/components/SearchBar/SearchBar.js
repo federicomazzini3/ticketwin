@@ -4,13 +4,11 @@ import { getCompetitionsBySearch } from '../../actions/competitions';
 import { Paper, AppBar, TextField, Button, Chip, Grid, Box } from '@mui/material';
 import { useHistory, useLocation } from 'react-router-dom';
 
-
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
 const SearchBar = () => {
-
 
     const dispatch = useDispatch();
     const query = useQuery();

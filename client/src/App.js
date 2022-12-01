@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import { Box, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";

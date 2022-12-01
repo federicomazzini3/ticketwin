@@ -1,4 +1,4 @@
-import {DARK, LIGHT} from '../constants/actionType';
+import { DARK, LIGHT } from '../constants/actionType';
 
 export default (state = {mode: 'light'}, action) => {
     switch (action.type) {
