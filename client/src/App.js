@@ -13,7 +13,7 @@ import CompetitionDetails from "./components/CompetitionDetails/CompetitionDetai
 
 const App = () => {
 
-  const user = JSON.parse(localStorage.getItem('profile'))
+  const user = () => JSON.parse(localStorage.getItem('profile'))
   const {mode} = useSelector((state) => state.mode); //from reducers
 
   const darkTheme = createTheme({
@@ -21,7 +21,7 @@ const App = () => {
       mode: mode,
     },
   });
-
+  
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline>
@@ -34,7 +34,7 @@ const App = () => {
               <Route path="/competitions/search" exact component={CompetitionsPage} />
               <Route path="/addcompetition" exact component={Form} />
               <Route path="/competitions/:id"  component={CompetitionDetails} />
-              <Route path="/auth" exact component={Auth} />
+              <Route path="/auth" exact component={() => !user() ? <Auth/> : <Redirect to='/user'/>} />
             </Switch>
             <Footer mode={mode}/>
           </Box>
