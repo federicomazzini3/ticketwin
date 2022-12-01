@@ -21,20 +21,16 @@ const CompetitionsPage = () => {
     const searchQuery = query.get('searchQuery');
     const [search, setSearch] = useState('')
 
-    /*useEffect(() => {
-        dispatch(getCompetitions());
-    }, [dispatch]);*/
-
     const searchCompetitions = () => {
         if (search.trim()) {
             dispatch(getCompetitionsBySearch(search, 1))
-            history.push(`/competitions/search?searchQuery=${search || 'none' }`);
+            history.push(`/competitions/search?searchQuery=${search || 'none' }&page=1`);
         } else {
             history.push('/competitions')
         }
     }
 
-    const handleKeyPress = (e) => {
+    const onEnterButton = (e) => {
         if (e.keyCode === 13) {
             searchCompetitions();
         }
@@ -46,7 +42,7 @@ const CompetitionsPage = () => {
                 <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={10}>
-                        <TextField name='search' variant='standard' label='   Search...' fullWidth value={search} onChange={(e) => { setSearch(e.target.value) }} onKeyDown={handleKeyPress}/>
+                        <TextField name='search' variant='standard' label='   Search...' fullWidth value={search} onChange={(e) => { setSearch(e.target.value) }} onKeyDown={onEnterButton}/>
                     </Grid>
                     <Grid item xs={12} sm={2}>
                         <Button onClick={searchCompetitions} variant='contained' color='primary' sx={{ mt: 2 }}>Search</Button>

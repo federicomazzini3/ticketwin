@@ -6,7 +6,7 @@ export const getCompetitions = async (req, res) => {
     
     try {
         
-        const LIMIT = 8; //mac competitions to retrieve
+        const LIMIT = 8; //num of competitions to retrieve
         const startIndex = (Number(page) - 1) * LIMIT; //the index to start the find()
         const total = await Competition.countDocuments({}); //number of total documents in the db
 

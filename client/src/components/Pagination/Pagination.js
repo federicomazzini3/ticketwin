@@ -3,12 +3,17 @@ import {Pagination, PaginationItem} from '@mui/material'
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCompetitions, getCompetitionsBySearch } from '../../actions/competitions'
+import { useHistory, useLocation } from 'react-router-dom';
+
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const Paginate = ({page}) => {
   const dispatch = useDispatch();
-  let params = new URLSearchParams(window.location.search);
-  let searchQuery = params.get('searchQuery');
-
+  const query = useQuery();
+  const searchQuery = query.get('searchQuery');
   const {numberOfPages } = useSelector((state) => state.competitions);
 
   useEffect(() => {
@@ -19,7 +24,8 @@ const Paginate = ({page}) => {
         dispatch(getCompetitions(page))
       }
     };
-  }, [page]);
+  }, [page, searchQuery]);
+
 
   return (
     <Pagination 
@@ -29,10 +35,10 @@ const Paginate = ({page}) => {
     variant="outlined"
     color='primary'
     renderItem={(item) => (
-        <PaginationItem {...item} 
-        component={Link}
-        to={`/competitions?page=${item.page}`}
-        />
+        !searchQuery 
+          ? <PaginationItem {...item}  component={Link} to={`/competitions?page=${item.page}`} /> 
+          : <PaginationItem {...item}  component={Link} to={`/competitions/search?searchQuery=${searchQuery}&page=${item.page}`} />
+        //<PaginationItem {...item}  component={Link} to={`/competitions?page=${item.page}`} />
     )}
     />
   )
