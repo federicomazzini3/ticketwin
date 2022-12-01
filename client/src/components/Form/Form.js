@@ -26,7 +26,7 @@ const Form = () => {
         setCompetitionData({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' })
     }
 
-    /*if (!user?.result?.name) {
+    if (!user?.result?.name) {
         return (
             <Paper elevation={3}>
                 <Typography variant="h6" align="center">
@@ -37,7 +37,7 @@ const Form = () => {
                 </Typography>
             </Paper>
         )
-    }*/
+    }
 
 
     return (
