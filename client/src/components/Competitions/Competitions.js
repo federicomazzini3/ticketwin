@@ -2,17 +2,15 @@ import React from "react";
 import { Grid, CircularProgress, Container } from "@mui/material"
 import { useSelector } from "react-redux";
 import Competition from "./Competition/Competition";
-import { getCompetitions } from '../../actions/competitions'
-import { useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react'
 
 
 const Competitions = () => {
-    const {competitions} = useSelector((state) => state.competitions); //from reducers
-
-    console.log(competitions);
+    const {competitions, isLoading} = useSelector((state) => state.competitions); //from reducers
+    if(!competitions?.length && !isLoading) return 'No competitions found'
+    
     return (
-        !competitions.length ? <CircularProgress/> : (
+        
+        isLoading ? <CircularProgress/> : (
             <Grid container spacing={4}>
                 {competitions.map((competition) => (
                     <Grid key={competition._id} item  xs={6} sm={6} md={3}>

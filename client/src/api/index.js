@@ -12,7 +12,8 @@ API.interceptors.request.use((req) => {
   });
 
 
-export const fetchCompetitions = () => API.get('/competitions');
+export const fetchCompetitions = (page) => API.get(`/competitions?page=${page}`);
+export const fetchCompetitionsBySearch = (searchQuery) => API.get(`/competitions/search?searchQuery=${searchQuery || 'none'}`);
 export const fetchCompetition = (id) => API.get(`/competitions/${id}`);
 export const createCompetition = (newCompetition) => API.post('/competitions', newCompetition);
 export const updateCompetition = (id, updateCompetition) => API.patch(`/competitions/${id}`, updateCompetition);

@@ -1,8 +1,19 @@
-import {FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_COMPETITION} from '../constants/actionType';
+import {FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_COMPETITION, SEARCH, START_LOADING, END_LOADING} from '../constants/actionType';
 
-export default (state = {competitions: []}, action) => {
+export default (state = {isLoading: true, competitions: []}, action) => {
     switch (action.type) {
+        case START_LOADING:
+            return {...state, isLoading: true};
+        case END_LOADING:
+            return {...state, isLoading: false};
         case FETCH_ALL:
+            return {
+                ...state, 
+                competitions: action.payload.data, 
+                currentPage: action.payload.currentPage,
+                numberOfPages: action.payload.numberOfPages,
+            };
+        case SEARCH:
             return {...state, competitions: action.payload};
         case FETCH_COMPETITION:
                 return {...state, competition: action.payload};

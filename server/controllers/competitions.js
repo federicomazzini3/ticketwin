@@ -2,8 +2,26 @@ import mongoose from "mongoose";
 import Competition from "../models/competition.js";
 
 export const getCompetitions = async (req, res) => {
+    const { page } = req.query;
+    
     try {
-        const competitions = await Competition.find()
+        const LIMIT = 8;
+        const startIndex = (Number(page) - 1) * LIMIT;
+        const total = await Competition.countDocuments({});
+
+        const competitions = await Competition.find().limit(LIMIT).skip(startIndex);
+
+        res.status(200).json({data: competitions, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
+    } catch (err) {
+        res.status(404).json({message: err.message, error: err})
+    }
+}
+
+export const getCompetitionsBySearch = async (req, res) => {
+    const {searchQuery} = req.query
+    try {
+        const query = new RegExp(searchQuery, 'i'); 
+        const competitions = await Competition.find({ $or: [{productName: query}, {productBrand: query}]})
         res.status(200).json(competitions);
     } catch (err) {
         res.status(404).json({message: err.message, error: err})

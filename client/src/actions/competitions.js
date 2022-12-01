@@ -1,10 +1,23 @@
 import * as api from '../api';
-import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE} from '../constants/actionType';
+import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE, SEARCH, START_LOADING, END_LOADING} from '../constants/actionType';
 
-export const getCompetitions = () => async (dispatch) => {
+export const getCompetitions = (page) => async (dispatch) => {
     try{
-        const { data } = await api.fetchCompetitions();
+        dispatch({type: START_LOADING});
+        const { data } = await api.fetchCompetitions(page);
         dispatch({type: FETCH_ALL, payload: data});
+        dispatch({type: END_LOADING});
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+ 
+export const getCompetitionsBySearch = (searchQuery) => async (dispatch) => {
+    try{
+        dispatch({type: START_LOADING});
+        const { data } = await api.fetchCompetitionsBySearch(searchQuery);
+        dispatch({type: SEARCH, payload: data});
+        dispatch({type: END_LOADING});
     } catch (err) {
         console.log(err.message)
     }
@@ -12,6 +25,7 @@ export const getCompetitions = () => async (dispatch) => {
 
 export const getCompetition = (id) => async (dispatch) => {
     try{
+        dispatch({type: START_LOADING});
         const { data } = await api.fetchCompetition(id);
         dispatch({type: FETCH_COMPETITION, payload: data});
     } catch (err) {
