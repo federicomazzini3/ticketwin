@@ -18,11 +18,21 @@ export const getCompetitions = async (req, res) => {
 }
 
 export const getCompetitionsBySearch = async (req, res) => {
-    const {searchQuery} = req.query
+    const {searchQuery, page} = req.query
+    console.log(searchQuery)
+    console.log(page)
+
     try {
         const query = new RegExp(searchQuery, 'i'); 
-        const competitions = await Competition.find({ $or: [{productName: query}, {productBrand: query}]})
-        res.status(200).json(competitions);
+
+        const LIMIT = 8;
+        const startIndex = (Number(page) - 1) * LIMIT;
+        const total = await Competition.countDocuments({ $or: [{productName: query}, {productBrand: query}]});
+
+        const competitions = await Competition.find({ $or: [{productName: query}, {productBrand: query}]}).limit(LIMIT).skip(startIndex);
+        //res.status(200).json(competitions);
+
+        res.status(200).json({data: competitions, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     } catch (err) {
         res.status(404).json({message: err.message, error: err})
     }
