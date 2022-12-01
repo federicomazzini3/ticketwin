@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {useHistory} from 'react-router-dom'
 
 
-const Competition = ({ competition, setCurrentId }) => {
+const Competition = ({ competition }) => {
 
     const history = useHistory();
     const openCompetition = () => history.push("/competitions/" + competition._id)

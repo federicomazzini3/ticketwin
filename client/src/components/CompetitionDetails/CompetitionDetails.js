@@ -5,7 +5,7 @@ import moment from 'moment'
 import { getCompetition } from '../../actions/competitions'
 import { Typography, Box } from '@mui/material'
 
-const DetailsCompetition = () => {
+const CompetitionDetails = () => {
   const { competition } = useSelector((state) => state.competitions);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -23,4 +23,4 @@ const DetailsCompetition = () => {
   )
 }
 
-export default DetailsCompetition
+export default CompetitionDetails

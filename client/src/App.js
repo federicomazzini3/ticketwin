@@ -5,11 +5,11 @@ import { Box, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
-import DetailsCompetition from "./components/DetailsCompetition/DetailsCompetition"
 import Footer from "./components/Footer/Footer";
-import Competitions from "./components/Competitions/Competitions";
 import Form from "./components/Form/Form";
 import { useSelector } from "react-redux";
+import CompetitionsPage from "./components/Competitions/CompetitionsPage";
+import CompetitionDetails from "./components/CompetitionDetails/CompetitionDetails";
 
 const App = () => {
 
@@ -31,9 +31,9 @@ const App = () => {
             <Navbar/>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/competitions" exact component={Competitions} />
+              <Route path="/competitions" exact component={CompetitionsPage} />
               <Route path="/addcompetition" exact component={Form} />
-              <Route path="/competitions/:id"  component={DetailsCompetition} />
+              <Route path="/competitions/:id"  component={CompetitionDetails} />
               <Route path="/auth" exact component={Auth} />
             </Switch>
             <Footer mode={mode} setMode={setMode}/>
