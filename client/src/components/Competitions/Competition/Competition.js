@@ -21,7 +21,7 @@ const Competition = ({ competition }) => {
                 <Typography variant="h6" component="h2">
                     {competition.productBrand}
                 </Typography>
-                <Typography> {competition.ticketPrice}$</Typography>
+                <Typography> {competition.ticketPrice}€</Typography>
                 <Typography> {competition.maxTicketNumber - competition.tickets.length} ticket rimasti</Typography>
                 <Typography> {moment(competition.deadline).fromNow(false)}</Typography>
                 {/*<Button size="small" color="primary" onClick={() => setCurrentId(competition._id)}><MoreHorizIcon fontSize="small"/> Edit</Button>

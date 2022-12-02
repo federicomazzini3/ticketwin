@@ -28,6 +28,7 @@ export const getCompetition = (id) => async (dispatch) => {
         dispatch({type: START_LOADING});
         const { data } = await api.fetchCompetition(id);
         dispatch({type: FETCH_COMPETITION, payload: data});
+        dispatch({type: END_LOADING});
     } catch (err) {
         console.log(err.message)
     }
