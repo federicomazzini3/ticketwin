@@ -1,7 +1,9 @@
 import React from 'react'
-import {Box, Typography, Stack, Button, Container } from "@mui/material"
+import {Box, Typography, Stack, Button, Container, Link } from "@mui/material"
+import { useHistory } from 'react-router-dom'
 
 const Home = () => {
+  const history = useHistory();
   return (
     <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6, }} >
           <Container maxWidth="sm">
@@ -12,7 +14,7 @@ const Home = () => {
               Un prodotto esclusivo, a un prezzo esclusivo
             </Typography>
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center" >
-              <Button variant="contained" href="/competitions">Explore the competitions</Button>
+              <Button variant="contained" component={Link} onClick={() => history.push('/competitions')}>Explore the competitions</Button>
             </Stack>
           </Container>
         </Box>

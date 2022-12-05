@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button, Switch } from '@mui/material';
+import { AppBar, Typography, Toolbar, Avatar, Button, Box } from '@mui/material';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
-import ticketWinLogo from '../../images/JLS.jpg';
-import ticketWinText from '../../images/JLS.jpg';
 import * as actionType from '../../constants/actionType';
 import useStyles from './styles';
 
-const Navbar = ({mode, setMode}) => {
+const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const location = useLocation();
@@ -37,22 +35,25 @@ const Navbar = ({mode, setMode}) => {
   }, [location]);
 
   return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
-      <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }} component={Link} to="/">
-        TicketWin
-      </Typography>
-      <Toolbar className={classes.toolbar}>
+    <AppBar position="static" color="default" elevation={0} sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}>
+      <Toolbar sx={{ flexWrap: 'wrap' }}>
+        <Typography variant="h5" color="inherit" noWrap sx={{ flexGrow: 1, textDecoration:'none' }} component={Link} to="/">
+          TicketWin
+        </Typography>
 
-      <Switch onChange={e => setMode(mode === "light" ? "dark" : "light")} sx={{ my: 1, mx: 1.5 }} />
-      <Link variant="button" color="text.primary" to="/competitions" sx={{ my: 1, mx: 1.5, lm:2}}>Competitions</Link>
-        {user?.result ? (
-          <div className={classes.profile}>
-            <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
-            <Typography className={classes.userName} variant="h6">{user?.result.name}</Typography>
+        <nav>
+        <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1, m: 1, mr:3, textDecoration:'none' }} component={Link} to="/competitions">competitions</Typography>
+        </nav>
+
+        {user?.result && (
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', }}>
+            <Avatar className={classes.purple} sx={{mr:3}} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
             <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
-          </div>
-        ) : (
-          <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+          </Box>)}
+
+
+        {!user?.result && (
+          <Button component={Link} to="/auth" variant="outlined" color="primary">Sign In</Button>
         )}
       </Toolbar>
     </AppBar>

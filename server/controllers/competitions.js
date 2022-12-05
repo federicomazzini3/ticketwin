@@ -2,9 +2,37 @@ import mongoose from "mongoose";
 import Competition from "../models/competition.js";
 
 export const getCompetitions = async (req, res) => {
+    const { page } = req.query;
+    
     try {
-        const competitions = await Competition.find()
-        res.status(200).json(competitions);
+        
+        const LIMIT = 8; //num of competitions to retrieve
+        const startIndex = (Number(page) - 1) * LIMIT; //the index to start the find()
+        const total = await Competition.countDocuments({}); //number of total documents in the db
+
+        const competitions = await Competition.find().limit(LIMIT).skip(startIndex); //query, limit to LIMIT and skip the first LIMIT * page documents
+
+        res.status(200).json({data: competitions, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
+    } catch (err) {
+        res.status(404).json({message: err.message, error: err})
+    }
+}
+
+export const getCompetitionsBySearch = async (req, res) => {
+    const {searchQuery, page} = req.query
+    console.log(searchQuery)
+    console.log(page)
+
+    try {
+        const query = new RegExp(searchQuery, 'i'); 
+
+        const LIMIT = 8;
+        const startIndex = (Number(page) - 1) * LIMIT;
+        const total = await Competition.countDocuments({ $or: [{productName: query}, {productBrand: query}]});
+
+        const competitions = await Competition.find({ $or: [{productName: query}, {productBrand: query}]}).limit(LIMIT).skip(startIndex);
+        
+        res.status(200).json({data: competitions, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     } catch (err) {
         res.status(404).json({message: err.message, error: err})
     }
