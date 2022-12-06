@@ -47,7 +47,7 @@ const Navbar = () => {
 
         {user?.result && (
           <Box sx={{ display: 'flex', justifyContent: 'space-between', }}>
-            <Avatar className={classes.purple} sx={{mr:3}} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
+            <Avatar className={classes.purple} sx={{mr:3,textDecoration:'none'}} alt={user?.result.name} src={user?.result.imageUrl} component={Link} to="/user"> {user?.result.name.charAt(0)}</Avatar>
             <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
           </Box>)}
 
