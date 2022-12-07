@@ -14,17 +14,18 @@ import Typography from '@mui/material/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { useState } from 'react';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
+function getStepContent(step, addressData, setAddressData, paymentData, setPaymentData, cart) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <AddressForm addressData={addressData} setAddressData={setAddressData}/>;
     case 1:
-      return <PaymentForm />;
+      return <PaymentForm paymentData={paymentData} setPaymentData={setPaymentData}/>;
     case 2:
-      return <Review />;
+      return <Review addressData={addressData} paymentData={paymentData} cart={cart} />;
     default:
       throw new Error('Unknown step');
   }
@@ -35,6 +36,9 @@ export default function Checkout() {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
 
+  const [addressData, setAddressData] = useState({ firstName: '', lastName: '', address1: '', address2: '', city: '', state: '', postal: '', country: '' });
+  const [paymentData, setPaymentData] = useState({ cardName: '', cardNumber: '', expDate: '', cvv: ''});
+  
   const [activeStep, setActiveStep] = React.useState(0);
   useEffect(() => {
     dispatch(readCart(dispatch))
@@ -42,6 +46,8 @@ export default function Checkout() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    console.log(addressData)
+    console.log(paymentData)
   };
 
   const handleBack = () => {
@@ -68,15 +74,10 @@ export default function Checkout() {
             <Typography variant="h5" gutterBottom>
               Thank you for your order.
             </Typography>
-            <Typography variant="subtitle1">
-              Your order number is #2001539. We have emailed your order
-              confirmation, and will send you an update when your order has
-              shipped.
-            </Typography>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {getStepContent(activeStep)}
+            {getStepContent(activeStep, addressData, setAddressData, paymentData, setPaymentData, cart)}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               {activeStep !== 0 && (
                 <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

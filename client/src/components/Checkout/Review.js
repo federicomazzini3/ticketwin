@@ -37,7 +37,7 @@ const payments = [
   { name: 'Expiry date', detail: '04/2024' },
 ];
 
-export default function Review() {
+export default function Review({addressData, paymentData, cart}) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -58,30 +58,21 @@ export default function Review() {
           </Typography>
         </ListItem>
       </List>
-      <Grid container spacing={2}>
+      <Grid container spacing={2}> 
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
-          </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          </Typography> 
+          <Typography gutterBottom>{`${addressData.firstName} ${addressData.lastName}`}</Typography>
+          <Typography gutterBottom>{`${addressData.city}, ${addressData.address1}, ${addressData.zip}, ${addressData.state}, ${addressData.country}`}</Typography>
         </Grid>
-        <Grid item container direction="column" xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Payment details
-          </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
-          </Grid>
+            Payment detail
+          </Typography> 
+          <Typography gutterBottom>{paymentData.cardName}</Typography>
+          <Typography gutterBottom>{paymentData.cardNumber}</Typography>
+          <Typography gutterBottom>{paymentData.expDate}</Typography>
         </Grid>
       </Grid>
     </React.Fragment>
