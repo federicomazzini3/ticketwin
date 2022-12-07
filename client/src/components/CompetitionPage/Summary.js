@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { readCart } from '../../actions/cart';
 
-const Summary = ({price}) => {
+const Summary = ({price, id}) => {
 
   const dispatch = useDispatch();
 
@@ -16,11 +16,15 @@ const Summary = ({price}) => {
       dispatch(readCart(dispatch))
   },[])
 
-  if (cart && cart.length > 0) return (
+  const competitionTicketsOnly = () => {
+    return cart.find(c => c.id === id)
+  }
+
+  if (competitionTicketsOnly() && competitionTicketsOnly().tickets.length > 0) return (
     <Grid item xs={12} sx={{ mt: 10, mb: -3, width: "100%", alignItems: 'center', justifyItems: 'center' }}>
 
       <Stack direction="row" spacing={2} justifyContent="center" >
-        <Button variant='contained' size='large' startIcon={<ShoppingCartIcon />}>Purchase now for {cart.length * price}€</Button>
+        <Button variant='contained' size='large' startIcon={<ShoppingCartIcon />}>Purchase now for {competitionTicketsOnly().tickets.length * price}€</Button>
       </Stack>
     </Grid>
   )

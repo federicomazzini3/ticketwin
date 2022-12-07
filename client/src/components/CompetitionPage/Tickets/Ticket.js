@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart, readCart, removeFromCart } from '../../../actions/cart';
 
-const Ticket = ({ status, ticketNumber, cart, setCart }) => {
+const Ticket = ({ status, ticketNumber, competitionId }) => {
 
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
     const { id } = useParams();
 
     const onClickAvailableTicket = () => {
-        dispatch(addToCart(ticketNumber, user ? user.result._id : null))
+        dispatch(addToCart(ticketNumber, user ? user.result._id : null, competitionId))
     }
 
     const onClickUnavailableTicket = () => {
@@ -19,7 +19,7 @@ const Ticket = ({ status, ticketNumber, cart, setCart }) => {
     }
 
     const onClickReservedTicket = () => {
-        dispatch(removeFromCart(ticketNumber))
+        dispatch(removeFromCart(ticketNumber, competitionId))
     }
 
     

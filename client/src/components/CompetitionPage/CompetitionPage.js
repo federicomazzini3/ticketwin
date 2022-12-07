@@ -31,9 +31,9 @@ const CompetitionPage = () => {
       <Grid container>
         <CompetitionDetails competition={competition}></CompetitionDetails>
         <Countdown deadline={competition?.deadline}></Countdown>
-        <Summary price={competition?.ticketPrice}></Summary>
+        <Summary price={competition?.ticketPrice} id={competition._id}></Summary>
         <Tickets competition={competition} cart={cart} setCart={setCart}></Tickets>
-        <Summary price={competition?.ticketPrice}></Summary>
+        <Summary price={competition?.ticketPrice} id={competition._id}></Summary>
       </Grid>
     </Container>
   )

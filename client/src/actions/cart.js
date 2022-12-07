@@ -11,18 +11,39 @@ export const readCart = () => (dispatch) => {
     }
 }
 
-export const addToCart = (ticketNumber, userId) => (dispatch) => {
+export const addToCart = (ticketNumber, userId, competitionId) => (dispatch) => {
     console.log("add cart action")
     const ticket = { number: ticketNumber, owner: userId }
     const data = JSON.parse(localStorage.getItem('cart'));
-    data.cart.push(ticket)
-    localStorage.setItem('cart', JSON.stringify({cart: data.cart}));
-    dispatch({type:ADD_CART, payload: data.cart})
+    if( data.cart.some(competition => competition.id === competitionId)){
+      const updatedData = data.cart.map((competition) => {
+        if (competition.id === competitionId) {
+          return {
+            ...competition,
+            tickets: [...competition.tickets, {number: ticketNumber, owner:userId}]
+          }
+        } else return competition
+        })
+      localStorage.setItem('cart', JSON.stringify({cart: updatedData}));
+      dispatch({type:ADD_CART, payload: updatedData})
+    } else {
+      const updatedData = [...data.cart, {id: competitionId, tickets: [{number: ticketNumber, owner: userId}]}]
+      localStorage.setItem('cart', JSON.stringify({cart: updatedData}));
+      dispatch({type:ADD_CART, payload: updatedData})
+    }
 };
 
-export const removeFromCart = (ticketNumber) => (dispatch) =>  {
+export const removeFromCart = (ticketNumber, competitionId) => (dispatch) =>  {
     const data = JSON.parse(localStorage.getItem('cart'));
-    const filteredData = data.cart.filter(ticket => ticket.number != ticketNumber)
+
+    const filteredData = data.cart.map(competition =>  (competition.id === competitionId) 
+                                                        ? ({
+                                                           id: competition.id,
+                                                           tickets: competition.tickets.filter(ticket => ticket.number !== ticketNumber)
+                                                          })
+                                                        :  competition)
+                                  .filter(competition => competition.tickets.length > 0)
+
     localStorage.setItem('cart', JSON.stringify({cart: filteredData}))
     dispatch({type:REMOVE_CART, payload: filteredData})
 }
@@ -34,6 +55,11 @@ export const clearCart = () => (dispatch) => {
 
 export const updateWithUser = (userId) => {
   const data = JSON.parse(localStorage.getItem('cart'));
-  const updatedData = data.cart.map(ticket => ({number: ticket.number, owner: userId}))
-  localStorage.setItem('cart', JSON.stringify({cart: updatedData}))
+  if (data){
+    const updatedData = data.cart.map(competition =>  {return { 
+      id: competition.id, 
+      tickets: competition.tickets.map(ticket => ({number: ticket.number, owner: userId}))
+    }})
+    localStorage.setItem('cart', JSON.stringify({cart: updatedData}))
+  }
 }
