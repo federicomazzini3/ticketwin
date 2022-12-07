@@ -66,12 +66,9 @@ export const deleteCompetition = (id) => async(dispatch) => {
 
 export const buyTicket = (id, ticket) => async(dispatch) => {
     try{
-
         const {data} = await api.buyTicket(id,ticket);
-        console.log("actions")
-        console.log(data)
+        
         dispatch({type: BUY, payload: data})
-        //return data.comments
     } catch(err) {
     
     }
