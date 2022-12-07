@@ -9,7 +9,7 @@ import Form from "./components/Form/Form";
 import User from "./components/User/User";
 import { useSelector } from "react-redux";
 import CompetitionsPage from "./components/Competitions/CompetitionsPage";
-import CompetitionDetails from "./components/CompetitionDetails/CompetitionDetails";
+import CompetitionPage from "./components/CompetitionPage/CompetitionPage"
 
 const App = () => {
 
@@ -33,7 +33,7 @@ const App = () => {
               <Route path="/competitions" exact component={CompetitionsPage} />
               <Route path="/competitions/search" exact component={CompetitionsPage} />
               <Route path="/addcompetition" exact component={Form} />
-              <Route path="/competitions/:id"  component={CompetitionDetails} />
+              <Route path="/competitions/:id"  component={CompetitionPage} />
               <Route path="/auth" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
               <Route path="/user" exact component={User} />
             </Switch>

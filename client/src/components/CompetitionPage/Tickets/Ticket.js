@@ -4,16 +4,28 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { buyTicket } from '../../../actions/competitions';
 
-const Ticket = ({ available, ticketNumber }) => {
+const Ticket = ({ status, ticketNumber, cart, setCart }) => {
 
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
     const { id } = useParams();
 
-    const handleBuy = () => {
+    const addToCart = () => {
         if (user) {
             const ticket = { number: ticketNumber, owner: user.result._id }
-            dispatch(buyTicket(id, ticket))
+            //dispatch(buyTicket(id, ticket))
+            setCart([...cart, ticket])
+            console.log(cart)
+        } else alert("User not logged")
+    }
+
+
+    const removeFromCart = () => {
+        if (user) {
+            const ticket = { number: ticketNumber, owner: user.result._id }
+            //dispatch(buyTicket(id, ticket))
+            setCart(cart.filter((t) => t.number != ticket.number))
+            console.log(cart)
         } else alert("User not logged")
     }
 
@@ -21,10 +33,10 @@ const Ticket = ({ available, ticketNumber }) => {
         alert("Ticket already purchased" )
     }
 
-
-    if (available) return (
+    
+    if (status == 'available') return (
         <Grid item xs={3} md={1}>
-            <Box onClick={() => handleBuy(ticketNumber)}
+            <Box onClick={() => addToCart()}
                 sx={{
                     borderStyle: "solid",
                     textAlign: 'center',
@@ -37,7 +49,23 @@ const Ticket = ({ available, ticketNumber }) => {
         </Grid>
     )
 
-    if (!available) return (
+
+    if (status == 'clicked') return (
+        <Grid item xs={3} md={1}>
+            <Box onClick={() => removeFromCart()}
+                sx={{
+                    borderStyle: "solid",
+                    textAlign: 'center',
+                    backgroundColor: 'rgba(51, 170, 250, .9)',
+                    '&:hover': {
+                        backgroundColor: 'rgba(51, 170, 250, .2)',
+                        cursor:'pointer'
+                    }
+                }}>{ticketNumber}</Box>
+        </Grid>
+    )
+
+    if (status == 'unavailable') return (
         <Grid item xs={3} md={1}>
             <Box onClick={() => handleBuyNotAvailable(ticketNumber)}
                 sx={{

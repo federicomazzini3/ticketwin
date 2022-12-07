@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCompetition } from '../../actions/competitions'
@@ -6,11 +6,13 @@ import { Typography, Box, CircularProgress, Container, Grid } from '@mui/materia
 import Countdown from './Countdown'
 import Tickets from './Tickets/Tickets'
 import Summary from './Summary'
+import CompetitionDetails from './CompetitionDetails'
 
-const CompetitionDetails = () => {
+const CompetitionPage = () => {
   const { competition, isLoading } = useSelector((state) => state.competitions);
-  const dispatch = useDispatch();
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const [cart, setCart] = useState([])
 
   useEffect(() => {
     dispatch(getCompetition(id))
@@ -27,21 +29,14 @@ const CompetitionDetails = () => {
   return (
     <Container sx={{ mt: 10, height: '100%', display: 'flex', flexDirection: 'column', py: 8, p: 10 }} maxWidth="md">
       <Grid container>
-        <Grid item xs={12} sm={4} component='img' src={competition.image || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} />
-        <Grid item xs={12} sm={8} sx={{ p: 5 }}>
-          <Typography variant='h2'>{competition.productName}</Typography>
-          <Typography variant='h3'>{competition.productBrand}</Typography>
-          <Typography variant='h5' sx={{ textDecoration: 'line-through' }} >{competition.productPrice}€</Typography>
-          <Typography variant='h5'>{competition.ticketPrice}€</Typography>
-          <Typography variant='h5'>{competition.maxTicketNumber} ticket rimasti</Typography>
-        </Grid>
+        <CompetitionDetails competition={competition}></CompetitionDetails>
         <Countdown deadline={competition?.deadline}></Countdown>
-        <Summary></Summary>
-        <Tickets competition={competition}></Tickets>
-        <Summary></Summary>
+        <Summary cart={cart} price={competition?.ticketPrice}></Summary>
+        <Tickets competition={competition} cart={cart} setCart={setCart}></Tickets>
+        <Summary cart={cart} price={competition?.ticketPrice}></Summary>
       </Grid>
     </Container>
   )
 }
 
-export default CompetitionDetails
+export default CompetitionPage;
