@@ -18,6 +18,7 @@ export const fetchCompetition = (id) => API.get(`/competitions/${id}`);
 export const createCompetition = (newCompetition) => API.post('/competitions', newCompetition);
 export const updateCompetition = (id, updateCompetition) => API.patch(`/competitions/${id}`, updateCompetition);
 export const deleteCompetition = (id) => API.delete(`/competitions/${id}`);
+export const buyTicket = (id, ticket) => API.post(`/competitions/${id}/buy`, ticket)
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);

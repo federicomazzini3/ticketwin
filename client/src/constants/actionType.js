@@ -4,6 +4,7 @@ export const DELETE = 'DELETE'
 export const FETCH_ALL = 'FETCH_ALL'
 export const FETCH_COMPETITION = 'FETCH_COMPETITION'
 export const SEARCH = 'SEARCH'
+export const BUY = 'BUY'
 
 export const START_LOADING = 'START_LOADING';
 export const END_LOADING = 'END_LOADING';

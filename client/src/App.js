@@ -6,7 +6,7 @@ import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import Footer from "./components/Footer/Footer";
 import Form from "./components/Form/Form";
-import user from "./components/User/user";
+import User from "./components/User/User";
 import { useSelector } from "react-redux";
 import CompetitionsPage from "./components/Competitions/CompetitionsPage";
 import CompetitionDetails from "./components/CompetitionDetails/CompetitionDetails";
@@ -35,7 +35,7 @@ const App = () => {
               <Route path="/addcompetition" exact component={Form} />
               <Route path="/competitions/:id"  component={CompetitionDetails} />
               <Route path="/auth" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
-              <Route path="/user" exact component={user} />
+              <Route path="/user" exact component={User} />
             </Switch>
             <Footer mode={mode}/>
           </Box>

@@ -2,12 +2,13 @@ import React, { useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
-import { getCompetition } from '../../actions/competitions'
+import { buyTicket, getCompetition } from '../../actions/competitions'
 import { Typography, Box, CircularProgress, Container, Grid } from '@mui/material'
 import useCountdown from './countDown'
 
 const CompetitionDetails = () => {
   const { competition, competitions, isLoading } = useSelector((state) => state.competitions);
+  const user = JSON.parse(localStorage.getItem('profile'))
   const [days, hours, minutes, seconds] = useCountdown(competition?.deadline);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -16,6 +17,13 @@ const CompetitionDetails = () => {
   useEffect(() => {
     dispatch(getCompetition(id))
   }, [id]);
+
+  const onBuy = (ticketNumber) => {
+    if(user){
+      const ticket = {number:ticketNumber, owner: user.result._id}
+      dispatch(buyTicket(id, ticket))
+    } else alert("User not logged")
+  }
 
   if (isLoading) return (
     <CircularProgress />
@@ -59,14 +67,16 @@ const CompetitionDetails = () => {
           {Array.from({ length: competition.maxTicketNumber }, (_, i) => i + 1).map((ticket) => (
             competition.tickets.find(ticketSold => ticketSold.number == ticket)
               ? <Grid item key={ticket} xs={3} md={1}>
-                <Box sx={{
+                <Box onClick={() => onBuy(ticket)}
+                sx={{
                   borderStyle: "solid",
                   textAlign: 'center',
                   backgroundColor: 'rgba(255, 0, 0, .4)'
                 }}>{ticket}</Box>
               </Grid>
               : <Grid item key={ticket} xs={3} md={1}>
-                <Box sx={{
+                <Box onClick={() => onBuy(ticket)}
+                sx={{
                   borderStyle: "solid",
                   textAlign: 'center',
                   backgroundColor: 'rgba(51, 170, 51, .2)',
