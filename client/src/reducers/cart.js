@@ -11,8 +11,6 @@ export default (state = {cart: []}, action) => {
         case CLEAR_CART:
             return {cart: []}
         case UPDATE_USER:
-            console.log("Update user")
-            console.log(action.payload)
             state.cart.map( t => console.log(t))
             return {...state, cart: state.cart.map(t => ({number: t.number, owner: action.payload})) }
         default:
