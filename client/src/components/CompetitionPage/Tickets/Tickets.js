@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Grid, Box } from '@mui/material'
 import Ticket from './Ticket'
+import { readCart } from '../../../actions/cart'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const Tickets = ({ competition, cart, setCart }) => {
+const Tickets = ({ competition, setCart }) => {
 
-    console.log(cart)
+    const dispatch = useDispatch();;
+    const { cart } = useSelector((state) => state.cart);
+
+    useEffect(() => {
+        dispatch(readCart(dispatch))
+    },[])
+
     return (
         <Grid container item xs={12} spacing={3} sx={{ mt: 10 }}>
             {Array.from({ length: competition.maxTicketNumber }, (_, i) => i + 1).map((ticket) => (

@@ -10,10 +10,12 @@ import User from "./components/User/User";
 import { useSelector } from "react-redux";
 import CompetitionsPage from "./components/Competitions/CompetitionsPage";
 import CompetitionPage from "./components/CompetitionPage/CompetitionPage"
+import Checkout from "./components/Checkout/Checkout";
 
 const App = () => {
 
   const user_data = () => JSON.parse(localStorage.getItem('profile'))
+  const cart = () => JSON.parse(localStorage.getItem('cart'))
   const {mode} = useSelector((state) => state.mode); //from reducers
 
   const darkTheme = createTheme({
@@ -36,6 +38,7 @@ const App = () => {
               <Route path="/competitions/:id"  component={CompetitionPage} />
               <Route path="/auth" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
               <Route path="/user" exact component={User} />
+              <Route path="/checkout" exact component={() => (user_data() && cart()) ? <Checkout/> : <Redirect to='/'/>} />
             </Switch>
             <Footer mode={mode}/>
           </Box>

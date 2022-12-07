@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Box, ButtonBase } from '@mui/material'
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { buyTicket } from '../../../actions/competitions';
+import { addToCart, readCart, removeFromCart } from '../../../actions/cart';
 
 const Ticket = ({ status, ticketNumber, cart, setCart }) => {
 
@@ -10,33 +10,22 @@ const Ticket = ({ status, ticketNumber, cart, setCart }) => {
     const user = JSON.parse(localStorage.getItem('profile'));
     const { id } = useParams();
 
-    const addToCart = () => {
-        if (user) {
-            const ticket = { number: ticketNumber, owner: user.result._id }
-            //dispatch(buyTicket(id, ticket))
-            setCart([...cart, ticket])
-            console.log(cart)
-        } else alert("User not logged")
+    const onClickAvailableTicket = () => {
+        dispatch(addToCart(ticketNumber, user ? user.result._id : null))
     }
 
-
-    const removeFromCart = () => {
-        if (user) {
-            const ticket = { number: ticketNumber, owner: user.result._id }
-            //dispatch(buyTicket(id, ticket))
-            setCart(cart.filter((t) => t.number != ticket.number))
-            console.log(cart)
-        } else alert("User not logged")
-    }
-
-    const handleBuyNotAvailable = () => {
+    const onClickUnavailableTicket = () => {
         alert("Ticket already purchased" )
+    }
+
+    const onClickReservedTicket = () => {
+        dispatch(removeFromCart(ticketNumber))
     }
 
     
     if (status == 'available') return (
         <Grid item xs={3} md={1}>
-            <Box onClick={() => addToCart()}
+            <Box onClick={() => onClickAvailableTicket()}
                 sx={{
                     borderStyle: "solid",
                     textAlign: 'center',
@@ -52,13 +41,12 @@ const Ticket = ({ status, ticketNumber, cart, setCart }) => {
 
     if (status == 'clicked') return (
         <Grid item xs={3} md={1}>
-            <Box onClick={() => removeFromCart()}
+            <Box onClick={() => onClickReservedTicket()}
                 sx={{
                     borderStyle: "solid",
                     textAlign: 'center',
                     backgroundColor: 'rgba(51, 170, 250, .9)',
                     '&:hover': {
-                        backgroundColor: 'rgba(51, 170, 250, .2)',
                         cursor:'pointer'
                     }
                 }}>{ticketNumber}</Box>
@@ -67,7 +55,7 @@ const Ticket = ({ status, ticketNumber, cart, setCart }) => {
 
     if (status == 'unavailable') return (
         <Grid item xs={3} md={1}>
-            <Box onClick={() => handleBuyNotAvailable(ticketNumber)}
+            <Box onClick={() => onClickUnavailableTicket()}
                 sx={{
                     borderStyle: "solid",
                     textAlign: 'center',

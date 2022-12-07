@@ -6,6 +6,12 @@ export const FETCH_COMPETITION = 'FETCH_COMPETITION'
 export const SEARCH = 'SEARCH'
 export const BUY = 'BUY'
 
+export const READ_CART = 'READ_CART'
+export const ADD_CART = 'REMOVE'
+export const REMOVE_CART = 'REMOVE'
+export const CLEAR_CART = 'CLEAR_CART'
+export const UPDATE_USER = 'UPDATE_USER'
+
 export const START_LOADING = 'START_LOADING';
 export const END_LOADING = 'END_LOADING';
 
