@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import Competition from "../models/competition.js";
+import User from "../models/user.js";
+import { updateUserTickets } from "./user.js";
 
 export const getCompetitions = async (req, res) => {
     const { page } = req.query;
@@ -20,8 +22,6 @@ export const getCompetitions = async (req, res) => {
 
 export const getCompetitionsBySearch = async (req, res) => {
     const {searchQuery, page} = req.query
-    console.log(searchQuery)
-    console.log(page)
 
     try {
         const query = new RegExp(searchQuery, 'i'); 
@@ -80,3 +80,27 @@ export const deleteCompetition = async (req, res) => {
 
     res.json({message: 'Competition deleted'})
 }
+
+export const buyTicket = async (req, res) => {
+    const { id } = req.params;
+    const ticket = req.body;
+
+    try{
+        const competition = await Competition.findById(id);
+        
+        //check if ticket is already purchased
+        if(competition.tickets.find(t => t.number == ticket.number)) throw (`Ticket ${ticket.number} already purchased`);
+
+        //update competition tickets
+        competition.tickets.push(ticket);
+        const updatedCompetition = await Competition.findByIdAndUpdate(id, competition, { new: true });
+
+        //update user purchases
+        await updateUserTickets(competition, ticket)
+
+        res.status(200).json(updatedCompetition);
+    } catch (err) {
+        res.status(409).json({message: err.message, error: err})
+        console.log(err)
+    }
+};

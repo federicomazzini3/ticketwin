@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import Competition from '../models/competition.js';
 
 import User from '../models/user.js';
 
@@ -42,5 +43,23 @@ export const signup = async (req, res) => {
         res.status(200).json({ result, token })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong.'});
+    }
+}
+
+export const updateUserTickets = async (competition, ticket) => {
+    try{
+        const user = await User.findById(ticket.owner)
+        
+        user.tickets.push({
+            number: ticket.number, 
+            productName: competition.productName, 
+            productBrand: competition.productBrand, 
+            price: competition.price, 
+            competition: competition._id})
+
+        await User.findByIdAndUpdate(ticket.owner, user, {new: true});
+    } catch(err) {
+        res.status(409).json({message: err.message, error: err});
+        console.log(err);
     }
 }
