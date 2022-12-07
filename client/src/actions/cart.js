@@ -11,7 +11,7 @@ export const readCart = () => (dispatch) => {
     }
 }
 
-export const addToCart = (ticketNumber, userId, competitionId) => (dispatch) => {
+export const addToCart = (ticketNumber, userId, competitionId, ticketPrice, productName ) => (dispatch) => {
     console.log("add cart action")
     const ticket = { number: ticketNumber, owner: userId }
     const data = JSON.parse(localStorage.getItem('cart'));
@@ -27,7 +27,7 @@ export const addToCart = (ticketNumber, userId, competitionId) => (dispatch) => 
       localStorage.setItem('cart', JSON.stringify({cart: updatedData}));
       dispatch({type:ADD_CART, payload: updatedData})
     } else {
-      const updatedData = [...data.cart, {id: competitionId, tickets: [{number: ticketNumber, owner: userId}]}]
+      const updatedData = [...data.cart, {id: competitionId, ticketPrice: ticketPrice, productName: productName, tickets: [{number: ticketNumber, owner: userId}]}]
       localStorage.setItem('cart', JSON.stringify({cart: updatedData}));
       dispatch({type:ADD_CART, payload: updatedData})
     }
@@ -38,7 +38,9 @@ export const removeFromCart = (ticketNumber, competitionId) => (dispatch) =>  {
 
     const filteredData = data.cart.map(competition =>  
                                         (competition.id === competitionId) ? ({ id: competition.id,
-                                                                                tickets: competition.tickets.filter(ticket => ticket.number !== ticketNumber)})
+                                                                                ticketPrice: competition.ticketPrice,
+                                                                                productName: competition.productName,
+                                                                               tickets: competition.tickets.filter(ticket => ticket.number !== ticketNumber)})
                                                                             :  competition)
                                   .filter(competition => competition.tickets.length > 0)
 
@@ -65,6 +67,8 @@ export const updateWithUser = (userId) => {
   if (data){
     const updatedData = data.cart.map(competition =>  {return { 
       id: competition.id, 
+      ticketPrice: competition.ticketPrice,
+      productName: competition.productName,
       tickets: competition.tickets.map(ticket => ({number: ticket.number, owner: userId}))
     }})
     localStorage.setItem('cart', JSON.stringify({cart: updatedData}))
