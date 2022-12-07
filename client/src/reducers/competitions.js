@@ -19,7 +19,7 @@ export default (state = {isLoading: true, competitions: []}, action) => {
         case DELETE:
             return {...state, competitions: state.competitions.filter((competition) => competition._id !== action.payload)}
         case BUY:
-            return {...state, competition: action.payload};
+            return state;
         case START_LOADING:
             return {...state, isLoading: true};
         case END_LOADING:

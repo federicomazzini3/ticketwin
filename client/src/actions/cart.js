@@ -12,7 +12,6 @@ export const readCart = () => (dispatch) => {
 }
 
 export const addToCart = (ticketNumber, userId, competitionId, ticketPrice, productName ) => (dispatch) => {
-    console.log("add cart action")
     const ticket = { number: ticketNumber, owner: userId }
     const data = JSON.parse(localStorage.getItem('cart'));
     if( data.cart.some(competition => competition.id === competitionId)){
@@ -58,7 +57,7 @@ export const removeAllExcept = (competitionId) => (dispatch) => {
 }
 
 export const clearCart = () => (dispatch) => {
-  localStorage.setItem('cart', JSON.stringify([]));
+  localStorage.setItem('cart', JSON.stringify({cart: []}));
   dispatch({type:CLEAR_CART})
 }
 

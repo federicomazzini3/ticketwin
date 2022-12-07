@@ -44,17 +44,17 @@ export default function Review({addressData, paymentData, cart}) {
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        {cart[0].tickets.map((ticket) => (
+          <ListItem key={ticket.number} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={cart[0].productName} secondary={`Ticket #${ticket.number}`} />
+            <Typography variant="body2">{`${cart[0].ticketPrice} €`}</Typography>
           </ListItem>
         ))}
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+            {`${cart[0].tickets.length * cart[0].ticketPrice} €`}
           </Typography>
         </ListItem>
       </List>

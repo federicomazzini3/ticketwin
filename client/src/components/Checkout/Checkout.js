@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { readCart } from '../../actions/cart';
+import { clearCart, readCart } from '../../actions/cart';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -15,6 +15,7 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import { useState } from 'react';
+import { buyTicket } from '../../actions/competitions';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
@@ -35,7 +36,6 @@ function getStepContent(step, addressData, setAddressData, paymentData, setPayme
 export default function Checkout() {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
-
   const [addressData, setAddressData] = useState({ firstName: '', lastName: '', address1: '', address2: '', city: '', state: '', postal: '', country: '' });
   const [paymentData, setPaymentData] = useState({ cardName: '', cardNumber: '', expDate: '', cvv: ''});
   
@@ -44,10 +44,14 @@ export default function Checkout() {
     dispatch(readCart(dispatch))
   }, [])
 
+  const handleBuy = () => {
+    setActiveStep(activeStep + 1);
+    dispatch(buyTicket(cart[0].id, cart[0].tickets))
+    dispatch(clearCart())
+  }
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    console.log(addressData)
-    console.log(paymentData)
   };
 
   const handleBack = () => {
@@ -87,7 +91,7 @@ export default function Checkout() {
 
               <Button
                 variant="contained"
-                onClick={handleNext}
+                onClick={activeStep === steps.length - 1 ? handleBuy : handleNext}
                 sx={{ mt: 3, ml: 1 }}
               >
                 {activeStep === steps.length - 1 ? 'Place order' : 'Next'}

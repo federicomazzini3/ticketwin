@@ -46,20 +46,21 @@ export const signup = async (req, res) => {
     }
 }
 
-export const updateUserTickets = async (competition, ticket) => {
+export const updateUserTickets = async (competition, tickets) => {
     try{
-        const user = await User.findById(ticket.owner)
+        const user = await User.findById(tickets[0].owner)
         
-        user.tickets.push({
-            number: ticket.number, 
-            productName: competition.productName, 
-            productBrand: competition.productBrand, 
-            price: competition.price, 
-            competition: competition._id})
+        tickets.map(ticket => {
+            user.tickets.push({
+                number: ticket.number, 
+                productName: competition.productName, 
+                productBrand: competition.productBrand, 
+                price: competition.price, 
+                competition: competition._id})
+        })
 
-        await User.findByIdAndUpdate(ticket.owner, user, {new: true});
+        await User.findByIdAndUpdate(tickets[0].owner, user, {new: true});
     } catch(err) {
-        res.status(409).json({message: err.message, error: err});
         console.log(err);
     }
 }

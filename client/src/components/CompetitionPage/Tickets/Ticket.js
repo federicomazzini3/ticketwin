@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart, readCart, removeFromCart } from '../../../actions/cart';
 
-const Ticket = ({ status, ticketNumber, competition }) => {
+const Ticket = ({ status, competition, ticketNumber }) => {
 
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));

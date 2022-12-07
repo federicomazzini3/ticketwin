@@ -83,22 +83,22 @@ export const deleteCompetition = async (req, res) => {
 
 export const buyTicket = async (req, res) => {
     const { id } = req.params;
-    const ticket = req.body;
+    const tickets = req.body;
 
     try{
         const competition = await Competition.findById(id);
         
-        //check if ticket is already purchased
-        if(competition.tickets.find(t => t.number == ticket.number)) throw (`Ticket ${ticket.number} already purchased`);
+        tickets.map(ticket => {
+            if(competition.tickets.find(tp => tp.number === ticket.number)) throw (`Ticket ${ticket.number} already purchased`);
 
-        //update competition tickets
-        competition.tickets.push(ticket);
+            competition.tickets.push(ticket);
+        })
+
         const updatedCompetition = await Competition.findByIdAndUpdate(id, competition, { new: true });
 
-        //update user purchases
-        await updateUserTickets(competition, ticket)
+        await updateUserTickets(competition, tickets)
 
-        res.status(200).json(updatedCompetition);
+        res.status(200).json();
     } catch (err) {
         res.status(409).json({message: err.message, error: err})
         console.log(err)
