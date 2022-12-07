@@ -36,16 +36,23 @@ export const addToCart = (ticketNumber, userId, competitionId) => (dispatch) => 
 export const removeFromCart = (ticketNumber, competitionId) => (dispatch) =>  {
     const data = JSON.parse(localStorage.getItem('cart'));
 
-    const filteredData = data.cart.map(competition =>  (competition.id === competitionId) 
-                                                        ? ({
-                                                           id: competition.id,
-                                                           tickets: competition.tickets.filter(ticket => ticket.number !== ticketNumber)
-                                                          })
-                                                        :  competition)
+    const filteredData = data.cart.map(competition =>  
+                                        (competition.id === competitionId) ? ({ id: competition.id,
+                                                                                tickets: competition.tickets.filter(ticket => ticket.number !== ticketNumber)})
+                                                                            :  competition)
                                   .filter(competition => competition.tickets.length > 0)
 
     localStorage.setItem('cart', JSON.stringify({cart: filteredData}))
     dispatch({type:REMOVE_CART, payload: filteredData})
+}
+
+export const removeAllExcept = (competitionId) => (dispatch) => {
+  const data = JSON.parse(localStorage.getItem('cart'));
+
+  const filteredData = data.cart.filter(competition => competition.id === competitionId);
+
+  localStorage.setItem('cart', JSON.stringify({cart: filteredData}))
+  dispatch({type:REMOVE_CART, payload: filteredData})
 }
 
 export const clearCart = () => (dispatch) => {
