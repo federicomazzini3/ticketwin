@@ -9,12 +9,14 @@ import { signin, signup } from '../../actions/auth';
 import { AUTH } from '../../constants/actionType';
 import useStyles from './styles';
 import Input from './Input';
+import { useParams } from 'react-router-dom';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-const SignUp = () => {
+const SignUp = (beforeBuy) => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
+  const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -32,9 +34,9 @@ const SignUp = () => {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(form, history));
+      dispatch(signup(form, history, () =>  (beforeBuy) ? history.push(`/competitions/${id}`) : history.push('/')));
     } else {
-      dispatch(signin(form, history));
+      dispatch(signin(form, history, () =>  (beforeBuy) ? history.push(`/competitions/${id}`) : history.push('/')));
     }
   };
 

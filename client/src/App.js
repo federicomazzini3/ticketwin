@@ -36,7 +36,8 @@ const App = () => {
               <Route path="/competitions/search" exact component={CompetitionsPage} />
               <Route path="/addcompetition" exact component={Form} />
               <Route path="/competitions/:id"  component={CompetitionPage} />
-              <Route path="/auth" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
+              <Route path="/auth" exact component={() => !user_data() ? <Auth beforebuy={true}/> : <Redirect to='/user'/>} />
+              <Route path="/auth/beforebuy/:id" exact component={() => !user_data() ? <Auth beforebuy={true}/> : <Redirect to='/user'/>} />
               <Route path="/user" exact component={User} />
               <Route path="/checkout" exact component={() => (user_data() && cart()) ? <Checkout/> : <Redirect to='/'/>} />
             </Switch>
