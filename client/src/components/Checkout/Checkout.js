@@ -16,12 +16,14 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import { useState } from 'react';
 import { buyTicket } from '../../actions/competitions';
+import { useHistory } from 'react-router-dom';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 
 export default function Checkout() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { cart } = useSelector((state) => state.cart);
   const [addressData, setAddressData] = useState({ firstName: '', lastName: '', address1: '', address2: '', city: '', state: '', postal: '', country: '' });
   const [paymentData, setPaymentData] = useState({ cardName: '', cardNumber: '', expDate: '', cvv: ''});
@@ -63,29 +65,37 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
-  //{getStepContent(activeStep, addressData, setAddressData, addressDataErrors, setAddressDataError, paymentData, setPaymentData, paymentDataErrors, setPaymentDataErrors, cart)}
-
-
   return (
     <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
       <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
         <Typography component="h1" variant="h4" align="center">
           Checkout
         </Typography>
+        { cart && cart.length > 0 && (
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
-        </Stepper>
-        {activeStep === steps.length ? (
+        </Stepper> )}
+        { cart && cart.length === 0 && activeStep !== steps.length && (
+          <React.Fragment>
+            <Typography variant="h5" gutterBottom>
+              No tickets in cart
+            </Typography>
+            <Button variant='text' onClick={() => history.push('/')}>Return to home</Button>
+          </React.Fragment>
+        )}
+        { activeStep === steps.length && (
           <React.Fragment>
             <Typography variant="h5" gutterBottom>
               Thank you for your order.
             </Typography>
+            <Button variant='text' onClick={() => history.push('/')}>Return to home</Button>
           </React.Fragment>
-        ) : (
+        )}
+        { activeStep !== steps.length && cart && cart.length > 0 && (
           <React.Fragment>
           {(activeStep === 0) && <AddressForm addressData={addressData} setAddressData={setAddressData} addressDataErrors={addressDataErrors} setAddressDataErrors={setAddressDataError}/>}
           {(activeStep === 1) && <PaymentForm paymentData={paymentData} setPaymentData={setPaymentData} paymentDataErrors={paymentDataErrors} setPaymentDataErrors={setPaymentDataErrors}/>}
