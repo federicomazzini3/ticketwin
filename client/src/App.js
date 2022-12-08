@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import CompetitionsPage from "./components/Competitions/CompetitionsPage";
 import CompetitionPage from "./components/CompetitionPage/CompetitionPage"
 import Checkout from "./components/Checkout/Checkout";
+import About from "./components/About/About";
 
 const App = () => {
 
@@ -39,6 +40,7 @@ const App = () => {
               <Route path="/auth" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
               <Route path="/auth/beforebuy/:id" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
               <Route path="/user" exact component={User} />
+              <Route path="/about" exact component={About} />
               <Route path="/checkout" exact component={() => (user_data() && cart()) ? <Checkout/> : <Redirect to='/'/>} />
             </Switch>
             <Footer mode={mode}/>

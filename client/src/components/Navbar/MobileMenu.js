@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Link } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import LoggedInMenu from "./LoggedInMenu";
-import LoggedOutMenu from "./LoggedOutMenu";
 import AvatarComponent from "./AvatarComponent";
 
 const MobileMenu = ({ user, logout }) => {
@@ -19,7 +17,7 @@ const MobileMenu = ({ user, logout }) => {
               <ListItemText>Competitions</ListItemText>
             </ListItemIcon>
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton component={Link} to="/about">
             <ListItemIcon>
               <ListItemText>About</ListItemText>
             </ListItemIcon>
