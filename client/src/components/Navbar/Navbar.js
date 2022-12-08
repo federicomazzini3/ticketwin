@@ -42,7 +42,7 @@ const Navbar = () => {
         </Typography>
 
         <nav>
-        <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1, m: 1, mr:3, textDecoration:'none' }} component={Link} to="/competitions">competitions</Typography>
+        <Typography variant="h8" color="inherit" noWrap sx={{ flexGrow: 1, m: 1, mr:3, textDecoration:'none' }} component={Link} to="/competitions">Competitions</Typography>
         </nav>
 
         {user?.result && (
