@@ -75,7 +75,7 @@ const About = () => {
                 </Box>
             </Container>
             <Snackbar
-                message="Copied to clibboard"
+                message="Email copied!"
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 autoHideDuration={2000}
                 onClose={() => setOpen(false)}
