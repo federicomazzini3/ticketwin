@@ -19,12 +19,12 @@ import { buyTicket } from '../../actions/competitions';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step, addressData, setAddressData, paymentData, setPaymentData, cart) {
+function getStepContent(step, addressData, setAddressData, addressDataErrors, setAddressDataError, paymentData, setPaymentData, paymentDataErrors, setPaymentDataErrors, cart) {
   switch (step) {
     case 0:
-      return <AddressForm addressData={addressData} setAddressData={setAddressData}/>;
+      return <AddressForm addressData={addressData} setAddressData={setAddressData} addressDataErrors={addressDataErrors} setAddressDataErrors={setAddressDataError}/>;
     case 1:
-      return <PaymentForm paymentData={paymentData} setPaymentData={setPaymentData}/>;
+      return <PaymentForm paymentData={paymentData} setPaymentData={setPaymentData} paymentDataErrors={paymentDataErrors} setPaymentDataErrors={setPaymentDataErrors}/>;
     case 2:
       return <Review addressData={addressData} paymentData={paymentData} cart={cart} />;
     default:
@@ -38,7 +38,8 @@ export default function Checkout() {
   const { cart } = useSelector((state) => state.cart);
   const [addressData, setAddressData] = useState({ firstName: '', lastName: '', address1: '', address2: '', city: '', state: '', postal: '', country: '' });
   const [paymentData, setPaymentData] = useState({ cardName: '', cardNumber: '', expDate: '', cvv: ''});
-  
+  const [addressDataErrors, setAddressDataError] = useState({ firstName: '', lastName: '', address1: '', address2: '', city: '', state: '', postal: '', country: '' })
+  const [paymentDataErrors, setPaymentDataErrors] = useState({ cardName: '', cardNumber: '', expDate: '', cvv: ''});
   const [activeStep, setActiveStep] = React.useState(0);
   useEffect(() => {
     dispatch(readCart(dispatch))
@@ -51,6 +52,23 @@ export default function Checkout() {
   }
 
   const handleNext = () => {
+    if(activeStep === 0){
+        if(!addressData.firstName) {setAddressDataError({...addressDataErrors, firstName: 'Insert valid First Name'}); return;}
+        if(!addressData.lastName) {setAddressDataError({...addressDataErrors, lastName: 'Insert valid Last Name'}); return;}
+        if(!addressData.address1) {setAddressDataError({...addressDataErrors, address1: 'Insert valid Address'}); return;}
+        if(!addressData.city) {setAddressDataError({...addressDataErrors, city: 'Insert valid City'}); return;}
+        if(!addressData.state) {setAddressDataError({...addressDataErrors, state: 'Insert valid State'}); return;}
+        if(!addressData.postal) {setAddressDataError({...addressDataErrors, postal: 'Insert valid Postal Code'}); return;}
+        if(!addressData.country) {setAddressDataError({...addressDataErrors, country: 'Insert valid Country'}); return;}
+    }
+
+    if(activeStep === 1) {
+      if(!paymentData.cardName) {setPaymentDataErrors({...paymentDataErrors, cardName: 'Insert valid Card Name'}); return;}
+      if(!paymentData.cardNumber) {setPaymentDataErrors({...paymentDataErrors, cardNumber: 'Insert valid Card Number'}); return;}
+      if(!paymentData.expDate) {setPaymentDataErrors({...paymentDataErrors, expDate: 'Insert valid Date'}); return;}
+      if(!paymentData.cvv) {setPaymentDataErrors({...paymentDataErrors, cvv: 'Insert valid CVV'}); return;}
+    }
+
     setActiveStep(activeStep + 1);
   };
 
@@ -81,7 +99,7 @@ export default function Checkout() {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {getStepContent(activeStep, addressData, setAddressData, paymentData, setPaymentData, cart)}
+            {getStepContent(activeStep, addressData, setAddressData, addressDataErrors, setAddressDataError, paymentData, setPaymentData, paymentDataErrors, setPaymentDataErrors, cart)}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               {activeStep !== 0 && (
                 <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

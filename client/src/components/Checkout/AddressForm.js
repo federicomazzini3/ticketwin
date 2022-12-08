@@ -3,7 +3,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
-export default function AddressForm({addressData, setAddressData}) {
+export default function AddressForm({addressData, setAddressData, addressDataErrors, setAddressDataErrors}) {
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -20,7 +21,9 @@ export default function AddressForm({addressData, setAddressData}) {
             autoComplete="given-name"
             variant="standard"
             value={addressData.firstName || ''} 
-            onChange={(e) => setAddressData({ ...addressData, firstName: e.target.value })}
+            onChange={(e) => {setAddressData({ ...addressData, firstName: e.target.value }); setAddressDataErrors({ ...addressDataErrors, firstName: '' })}}
+            error={!addressDataErrors.firstName ? false : true}
+            helperText={addressDataErrors.firstName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -33,7 +36,9 @@ export default function AddressForm({addressData, setAddressData}) {
             autoComplete="family-name"
             variant="standard"
             value={addressData.lastName || ''} 
-            onChange={(e) => setAddressData({ ...addressData, lastName: e.target.value })}
+            onChange={(e) => {setAddressData({ ...addressData, lastName: e.target.value }); setAddressDataErrors({ ...addressDataErrors, lastName: '' })}}
+            error={!addressDataErrors.lastName ? false : true}
+            helperText={addressDataErrors.lastName}
           />
         </Grid>
         <Grid item xs={12}>
@@ -46,7 +51,9 @@ export default function AddressForm({addressData, setAddressData}) {
             autoComplete="shipping address-line1"
             variant="standard"
             value={addressData.address1 || ''} 
-            onChange={(e) => setAddressData({ ...addressData, address1: e.target.value })}
+            onChange={(e) => {setAddressData({ ...addressData, address1: e.target.value }); setAddressDataErrors({ ...addressDataErrors, address1: '' })}}
+            error={!addressDataErrors.address1 ? false : true}
+            helperText={addressDataErrors.address1}
           />
         </Grid>
         <Grid item xs={12}>
@@ -71,7 +78,9 @@ export default function AddressForm({addressData, setAddressData}) {
             autoComplete="shipping address-level2"
             variant="standard"
             value={addressData.city || ''} 
-            onChange={(e) => setAddressData({ ...addressData, city: e.target.value })}
+            onChange={(e) => {setAddressData({ ...addressData, city: e.target.value }); setAddressDataErrors({ ...addressDataErrors, city: '' })}}
+            error={!addressDataErrors.city ? false : true}
+            helperText={addressDataErrors.city}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -82,20 +91,24 @@ export default function AddressForm({addressData, setAddressData}) {
             fullWidth
             variant="standard"
             value={addressData.state || ''} 
-            onChange={(e) => setAddressData({ ...addressData, state: e.target.value })}
+            onChange={(e) => {setAddressData({ ...addressData, state: e.target.value }); setAddressDataErrors({ ...addressDataErrors, state: '' })}}
+            error={!addressDataErrors.state ? false : true}
+            helperText={addressDataErrors.state}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
+            id="postal"
+            name="postal"
+            label="Postal code"
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
-            value={addressData.zip || ''} 
-            onChange={(e) => setAddressData({ ...addressData, zip: e.target.value })}
+            value={addressData.postal || ''} 
+            onChange={(e) => {setAddressData({ ...addressData, postal: e.target.value }); setAddressDataErrors({ ...addressDataErrors, postal: '' })}}
+            error={!addressDataErrors.postal ? false : true}
+            helperText={addressDataErrors.postal}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -108,7 +121,9 @@ export default function AddressForm({addressData, setAddressData}) {
             autoComplete="shipping country"
             variant="standard"
             value={addressData.country || ''} 
-            onChange={(e) => setAddressData({ ...addressData, country: e.target.value })}
+            onChange={(e) => {setAddressData({ ...addressData, country: e.target.value }); setAddressDataErrors({ ...addressDataErrors, country: '' })}}
+            error={!addressDataErrors.country ? false : true}
+            helperText={addressDataErrors.country}
           />
         </Grid>
       </Grid>
