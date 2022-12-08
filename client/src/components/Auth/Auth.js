@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-const SignUp = (beforeBuy) => {
+const SignUp = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const { id } = useParams();
@@ -34,9 +34,9 @@ const SignUp = (beforeBuy) => {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(form, history, () =>  (beforeBuy) ? history.push(`/competitions/${id}`) : history.push('/')));
+      dispatch(signup(form, () => (id) ? history.push(`/competitions/${id}`) : history.push('/')));
     } else {
-      dispatch(signin(form, history, () =>  (beforeBuy) ? history.push(`/competitions/${id}`) : history.push('/')));
+      dispatch(signin(form, () =>  (id) ? history.push(`/competitions/${id}`) : history.push('/')));
     }
   };
 

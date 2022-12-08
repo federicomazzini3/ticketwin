@@ -2,7 +2,7 @@ import { AUTH } from '../constants/actionType';
 import * as api from '../api/index.js';
 import { updateWithUser } from './cart';
 
-export const signin = (formData, router, redirect) => async (dispatch) => {
+export const signin = (formData, redirect) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
     dispatch({ type: AUTH, data });
@@ -13,7 +13,7 @@ export const signin = (formData, router, redirect) => async (dispatch) => {
   }
 };
 
-export const signup = (formData, router, redirect) => async (dispatch) => {
+export const signup = (formData, redirect) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
     dispatch({ type: AUTH, data });

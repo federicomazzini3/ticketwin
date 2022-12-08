@@ -19,19 +19,6 @@ import { buyTicket } from '../../actions/competitions';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step, addressData, setAddressData, addressDataErrors, setAddressDataError, paymentData, setPaymentData, paymentDataErrors, setPaymentDataErrors, cart) {
-  switch (step) {
-    case 0:
-      return <AddressForm addressData={addressData} setAddressData={setAddressData} addressDataErrors={addressDataErrors} setAddressDataErrors={setAddressDataError}/>;
-    case 1:
-      return <PaymentForm paymentData={paymentData} setPaymentData={setPaymentData} paymentDataErrors={paymentDataErrors} setPaymentDataErrors={setPaymentDataErrors}/>;
-    case 2:
-      return <Review addressData={addressData} paymentData={paymentData} cart={cart} />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
 
 export default function Checkout() {
   const dispatch = useDispatch();
@@ -76,6 +63,7 @@ export default function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
+  //{getStepContent(activeStep, addressData, setAddressData, addressDataErrors, setAddressDataError, paymentData, setPaymentData, paymentDataErrors, setPaymentDataErrors, cart)}
 
 
   return (
@@ -99,7 +87,9 @@ export default function Checkout() {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {getStepContent(activeStep, addressData, setAddressData, addressDataErrors, setAddressDataError, paymentData, setPaymentData, paymentDataErrors, setPaymentDataErrors, cart)}
+          {(activeStep === 0) && <AddressForm addressData={addressData} setAddressData={setAddressData} addressDataErrors={addressDataErrors} setAddressDataErrors={setAddressDataError}/>}
+          {(activeStep === 1) && <PaymentForm paymentData={paymentData} setPaymentData={setPaymentData} paymentDataErrors={paymentDataErrors} setPaymentDataErrors={setPaymentDataErrors}/>}
+          {(activeStep === 2) && <Review addressData={addressData} paymentData={paymentData} cart={cart} />}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               {activeStep !== 0 && (
                 <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
