@@ -5,9 +5,8 @@ import useStyles from './styles';
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Logout from '@mui/icons-material/Logout';
 
-const LoggedInMenu = ({user, setUser, logout}) => {
+const LoggedInMenu = ({user, logout}) => {
     const classes = useStyles();
-
     
     if(user?.result) return (
         <Box>

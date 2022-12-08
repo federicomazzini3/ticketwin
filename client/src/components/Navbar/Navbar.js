@@ -6,19 +6,18 @@ import decode from 'jwt-decode';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material';
 import MobileMenu from './MobileMenu';
-import AvatarComponent from './AvatarComponent';
 import { LOGOUT } from '../../constants/actionType';
+import DesktopMenu from './DesktopMenu';
 
 
 const Navbar = () => {
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const theme = useTheme();
-  const isMatchMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const isMatchMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const logout = () => {
     dispatch({ type: LOGOUT });
@@ -49,16 +48,14 @@ const Navbar = () => {
           TicketWin
         </Typography>
 
-        {isMatchMobile ? (
-          <MobileMenu user={user} setUser={setUser} logout={logout}/>
-        ) : (
-          <>
-            <nav>
-              <Typography variant="h8" color="inherit" noWrap sx={{ flexGrow: 1, m: 1, mr: 3, textDecoration: 'none' }} component={Link} to="/competitions">Competitions</Typography>
-            </nav>
-            <AvatarComponent user={user} setUser={setUser} logout={logout}/>
-          </>
+        {isMatchMobile && (
+          <MobileMenu user={user} logout={logout}/>
         )}
+
+        {!isMatchMobile && (
+          <DesktopMenu user={user} logout={logout}/>
+        )}
+
       </Toolbar>
     </AppBar>
   );

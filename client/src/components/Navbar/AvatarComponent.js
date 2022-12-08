@@ -5,13 +5,12 @@ import { IconButton } from '@mui/material';
 import LoggedInMenu from './LoggedInMenu';
 import LoggedOutMenu from './LoggedOutMenu';
 
-const AvatarComponent = ({user, setUser, logout}) => {
+const AvatarComponent = ({user, logout}) => {
 
     const classes = useStyles();
-
-
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -72,10 +71,10 @@ const AvatarComponent = ({user, setUser, logout}) => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 {user?.result && (
-                    <LoggedInMenu  user={user} setUser={setUser} logout={logout}></LoggedInMenu>
+                    <LoggedInMenu  user={user} logout={logout}></LoggedInMenu>
                 )}
                 {!user?.result && (
-                    <LoggedOutMenu  user={user} setUser={setUser} logout={logout}></LoggedOutMenu>
+                    <LoggedOutMenu  user={user}></LoggedOutMenu>
                 )}
             </Menu>
         </>

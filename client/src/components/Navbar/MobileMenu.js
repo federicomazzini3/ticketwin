@@ -5,13 +5,13 @@ import LoggedInMenu from "./LoggedInMenu";
 import LoggedOutMenu from "./LoggedOutMenu";
 import AvatarComponent from "./AvatarComponent";
 
-const MobileMenu = ({ user, setUser, logout }) => {
+const MobileMenu = ({ user, logout }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
     <React.Fragment>
-      <AvatarComponent user={user} setUser={setUser} logout={logout}></AvatarComponent>
-      
+      <AvatarComponent user={user} logout={logout}></AvatarComponent>
+
       <Drawer anchor="right" open={openDrawer} onClose={() => setOpenDrawer(false)} >
         <List>
           <ListItemButton component={Link} to="/competitions">
