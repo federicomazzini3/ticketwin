@@ -1,4 +1,4 @@
-import {FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_COMPETITION, SEARCH, START_LOADING, END_LOADING} from '../constants/actionType';
+import {FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_COMPETITION, SEARCH, START_LOADING, END_LOADING, BUY} from '../constants/actionType';
 
 export default (state = {isLoading: true, competitions: []}, action) => {
     switch (action.type) {
@@ -18,6 +18,8 @@ export default (state = {isLoading: true, competitions: []}, action) => {
             return {...state, competitions: state.competitions.map((competition) => competition._id === action.payload._id ? action.payload : competition)}
         case DELETE:
             return {...state, competitions: state.competitions.filter((competition) => competition._id !== action.payload)}
+        case BUY:
+            return state;
         case START_LOADING:
             return {...state, isLoading: true};
         case END_LOADING:

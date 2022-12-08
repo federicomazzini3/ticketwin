@@ -1,5 +1,5 @@
 import * as api from '../api';
-import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE, SEARCH, START_LOADING, END_LOADING} from '../constants/actionType';
+import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE, SEARCH, START_LOADING, END_LOADING, BUY, CLEAR_CART} from '../constants/actionType';
 
 export const getCompetitions = (page) => async (dispatch) => {
     try{
@@ -60,6 +60,15 @@ export const deleteCompetition = (id) => async(dispatch) => {
 
         dispatch({type: DELETE, payload: id})
     } catch(err) {
-        console.log(err)
+        console.log(err.message)
+    }
+}
+
+export const buyTicket = (id, tickets) => async(dispatch) => {
+    try{
+        await api.buyTicket(id,tickets);
+        dispatch({type: BUY})
+    } catch(err) {
+        console.log(err.message)
     }
 }
