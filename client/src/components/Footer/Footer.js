@@ -3,12 +3,14 @@ import React from 'react'
 import { Typography, Link } from '@mui/material'
 import { setDarkMode, setLightMode } from '../../actions/mode'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 //onClick={e => setMode(mode === "light" ? "dark" : "light")}
 const Footer = ({ mode }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
 
+    if(location.pathname !== '/') 
     return (
         <Container maxWidth="md" component="footer"
             sx={{
@@ -37,7 +39,8 @@ const Footer = ({ mode }) => {
                 {'.'}
             </Typography>
         </Container>
-    )
+    ) 
+    else return (<></>)
 }
 
 export default Footer

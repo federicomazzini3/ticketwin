@@ -18,7 +18,7 @@ const CompetitionsPage = () => {
     const page = query.get('page') || 1;
 
     return (
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 5 }} maxWidth="md">
             <SearchBar></SearchBar>
             <Competitions></Competitions>
             <Paper elevation={6} sx={{ borderRadius: 4, mt: 2, p: 2 }}>

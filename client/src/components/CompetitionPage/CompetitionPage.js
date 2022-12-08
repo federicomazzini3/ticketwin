@@ -27,7 +27,7 @@ const CompetitionPage = () => {
   )
 
   return (
-    <Container sx={{ mt: 10, height: '100%', display: 'flex', flexDirection: 'column', py: 8, p: 10 }} maxWidth="md">
+    <Container sx={{ mt: 10, height: '100%', display: 'flex', flexDirection: 'column', py: 8, p: 3 }} maxWidth="md">
       <Grid container>
         <CompetitionDetails competition={competition}></CompetitionDetails>
         <Countdown deadline={competition?.deadline}></Countdown>

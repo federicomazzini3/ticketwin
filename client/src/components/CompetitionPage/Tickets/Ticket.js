@@ -24,7 +24,7 @@ const Ticket = ({ status, competition, ticketNumber }) => {
 
     
     if (status === 'available') return (
-        <Grid item xs={3} md={1}>
+        <Grid item xs={3} sm={2} md={1}>
             <Box onClick={() => onClickAvailableTicket()}
                 sx={{
                     borderStyle: "solid",
@@ -40,7 +40,7 @@ const Ticket = ({ status, competition, ticketNumber }) => {
 
 
     if (status === 'clicked') return (
-        <Grid item xs={3} md={1}>
+        <Grid item xs={3} sm={2} md={1}>
             <Box onClick={() => onClickReservedTicket()}
                 sx={{
                     borderStyle: "solid",
@@ -54,7 +54,7 @@ const Ticket = ({ status, competition, ticketNumber }) => {
     )
 
     if (status === 'unavailable') return (
-        <Grid item xs={3} md={1}>
+        <Grid item xs={3} sm={2} md={1}>
             <Box onClick={() => onClickUnavailableTicket()}
                 sx={{
                     borderStyle: "solid",
