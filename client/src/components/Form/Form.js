@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { TextField, Button, Typography, Box, Paper } from '@mui/material';
+import React, { useState } from "react";
+import { TextField, Button, Typography, Box } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useDispatch } from 'react-redux';
-import { createCompetition, updateCompetition } from "../../actions/competitions";
-import { useSelector } from "react-redux";
+import { createCompetition } from "../../actions/competitions";
 import { useHistory } from "react-router-dom";
 
 //productName: String, productBrand: String, ticketPrice: Number, productPrice: Number, maxTicketNumber: Number, deadline: Date,
@@ -26,16 +25,16 @@ const Form = () => {
         setCompetitionData({ productName: '', productBrand: '', ticketPrice: '', productPrice: '', maxTicketNumber: '', deadline: new Date(), image: '' })
     }
 
-    if (!user?.result?.name) {
+    if (user?.result?.name !== 'admin') {
         return (
-            <Paper elevation={3}>
+            <Box sx={{mt:5}}>
                 <Typography variant="h6" align="center">
                     You're not allowed to add a new competition
                 </Typography>
                 <Typography variant="h6" align="center">
-                    Log in first
+                    Log in as admin first
                 </Typography>
-            </Paper>
+            </Box>
         )
     }
 

@@ -20,19 +20,19 @@ const CountdownComponent = ({deadline}) => {
   return (
     <Grid container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
           <Grid item xs={3}>
-            <Typography variant='h5'>{(days) ? days : ''}</Typography>
+            <Typography variant='h5'>{(days) ? days : '0'}</Typography>
             <Typography>giorni</Typography>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant='h5'>{(hours) ? hours : ''}</Typography>
+            <Typography variant='h5'>{(hours) ? hours : '0'}</Typography>
             <Typography>ore</Typography>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant='h5'>{(minutes) ? minutes : ''}</Typography>
+            <Typography variant='h5'>{(minutes) ? minutes : '0'}</Typography>
             <Typography>minuti</Typography>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant='h5'>{(seconds) ? seconds : ''}</Typography>
+            <Typography variant='h5'>{(seconds) ? seconds : '0'}</Typography>
             <Typography>secondi</Typography>
           </Grid>
         </Grid>

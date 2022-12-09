@@ -12,7 +12,6 @@ export const readCart = () => (dispatch) => {
 }
 
 export const addToCart = (ticketNumber, userId, competitionId, ticketPrice, productName ) => (dispatch) => {
-    const ticket = { number: ticketNumber, owner: userId }
     const data = JSON.parse(localStorage.getItem('cart'));
     if( data.cart.some(competition => competition.id === competitionId)){
       const updatedData = data.cart.map((competition) => {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, Box } from '@mui/material'
+import { Grid } from '@mui/material'
 import Ticket from './Ticket'
 import { readCart } from '../../../actions/cart'
 import { useDispatch } from 'react-redux'

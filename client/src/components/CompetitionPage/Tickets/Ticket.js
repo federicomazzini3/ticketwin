@@ -1,14 +1,12 @@
 import React from 'react'
-import { Grid, Box, ButtonBase } from '@mui/material'
+import { Grid, Box } from '@mui/material'
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { addToCart, readCart, removeFromCart } from '../../../actions/cart';
+import { addToCart, removeFromCart } from '../../../actions/cart';
 
 const Ticket = ({ status, competition, ticketNumber }) => {
 
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
-    const { id } = useParams();
 
     const onClickAvailableTicket = () => {
         dispatch(addToCart(ticketNumber, user ? user.result._id : null, competition._id, competition.ticketPrice, competition.productName))
@@ -24,7 +22,7 @@ const Ticket = ({ status, competition, ticketNumber }) => {
 
     
     if (status === 'available') return (
-        <Grid item xs={3} md={1}>
+        <Grid item xs={3} sm={2} md={1}>
             <Box onClick={() => onClickAvailableTicket()}
                 sx={{
                     borderStyle: "solid",
@@ -40,7 +38,7 @@ const Ticket = ({ status, competition, ticketNumber }) => {
 
 
     if (status === 'clicked') return (
-        <Grid item xs={3} md={1}>
+        <Grid item xs={3} sm={2} md={1}>
             <Box onClick={() => onClickReservedTicket()}
                 sx={{
                     borderStyle: "solid",
@@ -54,7 +52,7 @@ const Ticket = ({ status, competition, ticketNumber }) => {
     )
 
     if (status === 'unavailable') return (
-        <Grid item xs={3} md={1}>
+        <Grid item xs={3} sm={2} md={1}>
             <Box onClick={() => onClickUnavailableTicket()}
                 sx={{
                     borderStyle: "solid",

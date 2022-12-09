@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, CircularProgress, Container } from "@mui/material"
+import { Grid, CircularProgress } from "@mui/material"
 import { useSelector } from "react-redux";
 import Competition from "./Competition/Competition";
 
@@ -13,7 +13,7 @@ const Competitions = () => {
     if (!isLoading) return (
         <Grid container spacing={4}>
             {competitions.map((competition) => (
-                <Grid key={competition._id} item xs={6} sm={6} md={3}>
+                <Grid key={competition._id} item xs={6} sm={4} md={3}>
                     <Competition competition={competition}></Competition>
                 </Grid>
             ))}

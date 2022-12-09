@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCompetition } from '../../actions/competitions'
-import { Typography, Box, CircularProgress, Container, Grid } from '@mui/material'
+import { Typography, CircularProgress, Container, Grid } from '@mui/material'
 import Countdown from './Countdown'
 import Tickets from './Tickets/Tickets'
 import Summary from './Summary'
 import CompetitionDetails from './CompetitionDetails'
+import Progress from './Progress'
 
 const CompetitionPage = () => {
   const { competition, isLoading } = useSelector((state) => state.competitions);
@@ -27,10 +28,11 @@ const CompetitionPage = () => {
   )
 
   return (
-    <Container sx={{ mt: 10, height: '100%', display: 'flex', flexDirection: 'column', py: 8, p: 10 }} maxWidth="md">
+    <Container sx={{ mt: 10, height: '100%', display: 'flex', flexDirection: 'column', py: 8, p: 3 }} maxWidth="md">
       <Grid container>
         <CompetitionDetails competition={competition}></CompetitionDetails>
         <Countdown deadline={competition?.deadline}></Countdown>
+        <Progress maxTicketNumber={competition.maxTicketNumber} ticketSoldNumber={competition.tickets.length}></Progress>
         <Summary price={competition?.ticketPrice} id={competition._id}></Summary>
         <Tickets competition={competition} cart={cart} setCart={setCart}></Tickets>
         <Summary price={competition?.ticketPrice} id={competition._id}></Summary>
