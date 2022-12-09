@@ -1,13 +1,19 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography, ButtonBase } from "@mui/material"
+import { Card, CardContent, CardMedia, Typography, ButtonBase, Button } from "@mui/material"
 import moment from 'moment';
 import {useHistory} from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteCompetition } from "../../../actions/competitions";
 
 
 const Competition = ({ competition }) => {
 
     const history = useHistory();
+    const dispatch = useDispatch();
     const openCompetition = () => history.push("/competitions/" + competition._id)
+    const user = JSON.parse(localStorage.getItem('profile'));
+
     return (
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <ButtonBase onClick={openCompetition}>
@@ -21,10 +27,10 @@ const Competition = ({ competition }) => {
                     {competition.productBrand}
                 </Typography>
                 <Typography fontSize={15}> {competition.ticketPrice}€</Typography>
-                <Typography fontSize={15}> {competition.maxTicketNumber - competition.tickets.length} ticket rimasti</Typography>
+                <Typography fontSize={15}> {competition.maxTicketNumber - competition.tickets.length} remaining tickets</Typography>
                 <Typography fontSize={15}> Expire {moment(competition.deadline).fromNow(false)}</Typography>
-                {/*<Button size="small" color="primary" onClick={() => setCurrentId(competition._id)}><MoreHorizIcon fontSize="small"/> Edit</Button>
-                <Button size="small" color="primary" onClick={() => dispatch(deleteCompetition(competition._id))}><DeleteIcon fontSize="small"/> Delete</Button>*/}
+                {(user?.result.name ==='admin') && (
+                <Button size="small" color="primary" onClick={() => dispatch(deleteCompetition(competition._id))}><DeleteIcon fontSize="small"/> Delete</Button>)}
             </CardContent>
         </Card>
     )
