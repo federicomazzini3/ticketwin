@@ -45,10 +45,6 @@ const Footer = ({ mode }) => {
                         <IconButton onClick={() => mode === "light" ? dispatch(setDarkMode(dispatch)) : dispatch(setLightMode(dispatch))}>
                             {mode === "light" ? <DarkModeIcon></DarkModeIcon> : <LightModeIcon></LightModeIcon>}
                         </IconButton>
-
-                        <IconButton onClick={() => history.push('/addcompetition')}>
-                            <AdminPanelSettingsIcon></AdminPanelSettingsIcon>
-                        </IconButton>
                     </Grid>
 
                 </Grid>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Link } from "@mui/material";
+import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Link, Divider, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AvatarComponent from "./AvatarComponent";
 
@@ -22,6 +22,16 @@ const MobileMenu = ({ user, logout }) => {
               <ListItemText>About</ListItemText>
             </ListItemIcon>
           </ListItemButton>
+          {(user?.result.name === 'admin') && (
+            <>
+              <Divider></Divider>
+              <ListItemButton component={Link} to="/addcompetition">
+                <ListItemIcon>
+                  <ListItemText>New competition</ListItemText>
+                </ListItemIcon>
+              </ListItemButton>
+            </>
+          )}
         </List>
       </Drawer>
       <IconButton sx={{ color: "primary", marginLeft: "auto" }} onClick={() => setOpenDrawer(!openDrawer)}>
