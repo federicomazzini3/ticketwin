@@ -7,6 +7,7 @@ import Countdown from './Countdown'
 import Tickets from './Tickets/Tickets'
 import Summary from './Summary'
 import CompetitionDetails from './CompetitionDetails'
+import Progress from './Progress'
 
 const CompetitionPage = () => {
   const { competition, isLoading } = useSelector((state) => state.competitions);
@@ -31,6 +32,7 @@ const CompetitionPage = () => {
       <Grid container>
         <CompetitionDetails competition={competition}></CompetitionDetails>
         <Countdown deadline={competition?.deadline}></Countdown>
+        <Progress maxTicketNumber={competition.maxTicketNumber} ticketSoldNumber={competition.tickets.length}></Progress>
         <Summary price={competition?.ticketPrice} id={competition._id}></Summary>
         <Tickets competition={competition} cart={cart} setCart={setCart}></Tickets>
         <Summary price={competition?.ticketPrice} id={competition._id}></Summary>
