@@ -1,5 +1,5 @@
 import * as api from '../api';
-import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE, SEARCH, START_LOADING, END_LOADING, BUY, CLEAR_CART} from '../constants/actionType';
+import {FETCH_ALL, FETCH_COMPETITION, CREATE, UPDATE, DELETE, SEARCH, START_LOADING, END_LOADING, BUY} from '../constants/actionType';
 
 export const getCompetitions = (page) => async (dispatch) => {
     try{

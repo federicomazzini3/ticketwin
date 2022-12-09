@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { getCompetitionsBySearch } from '../../../actions/competitions';
-import { Paper, AppBar, TextField, Button, Chip, Grid, Box, IconButton } from '@mui/material';
+import { AppBar, TextField, Grid, IconButton } from '@mui/material';
 import { useHistory, useLocation } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -14,8 +14,6 @@ const SearchBar = () => {
     const dispatch = useDispatch();
     const query = useQuery();
     const history = useHistory();
-    const page = query.get('page') || 1;
-    const searchQuery = query.get('searchQuery');
     const [search, setSearch] = useState('')
 
     const searchCompetitions = () => {

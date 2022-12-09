@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Link, Divider, Typography } from "@mui/material";
+import { Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Link, Divider } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AvatarComponent from "./AvatarComponent";
 

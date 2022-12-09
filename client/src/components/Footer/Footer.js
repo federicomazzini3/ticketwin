@@ -1,17 +1,15 @@
 import { Container } from '@mui/system'
 import React from 'react'
-import { Typography, Link, IconButton, Grid, Box } from '@mui/material'
+import { Typography, IconButton, Grid } from '@mui/material'
 import { setDarkMode, setLightMode } from '../../actions/mode'
 import { useDispatch } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 
 const Footer = ({ mode }) => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const location = useLocation();
 
     if (location.pathname !== '/')

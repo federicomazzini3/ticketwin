@@ -1,14 +1,12 @@
 import React from 'react'
-import { Grid, Box, ButtonBase } from '@mui/material'
+import { Grid, Box } from '@mui/material'
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { addToCart, readCart, removeFromCart } from '../../../actions/cart';
+import { addToCart, removeFromCart } from '../../../actions/cart';
 
 const Ticket = ({ status, competition, ticketNumber }) => {
 
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
-    const { id } = useParams();
 
     const onClickAvailableTicket = () => {
         dispatch(addToCart(ticketNumber, user ? user.result._id : null, competition._id, competition.ticketPrice, competition.productName))

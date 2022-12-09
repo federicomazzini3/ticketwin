@@ -1,6 +1,5 @@
 import React from 'react'
 import Competitions from './Competitions';
-import { useDispatch } from 'react-redux';
 import { Container } from '@mui/system';
 import Pagination from './Pagination/Pagination'
 import { Paper } from '@mui/material';
@@ -13,7 +12,6 @@ function useQuery() {
 
 const CompetitionsPage = () => {
 
-    const dispatch = useDispatch();
     const query = useQuery();
     const page = query.get('page') || 1;
 
