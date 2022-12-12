@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Form from "./components/Form/Form";
 import User from "./components/User/User";
 import { useSelector } from "react-redux";
-import CompetitionsPage from "./components/Competitions/CompetitionsPage";
+import CompetitionsPage from "./components/CompetitionsPage/CompetitionsPage";
 import CompetitionPage from "./components/CompetitionPage/CompetitionPage"
 import Checkout from "./components/Checkout/Checkout";
 import About from "./components/About/About";
