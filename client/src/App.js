@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import CompetitionsPage from "./components/CompetitionsPage/CompetitionsPage";
 import CompetitionPage from "./components/CompetitionPage/CompetitionPage"
 import Checkout from "./components/Checkout/Checkout";
-import About from "./components/About/About";
+import About from "./components/About/About"; 
 
 const App = () => {
 
