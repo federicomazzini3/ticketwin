@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Competition from "../models/competition.js";
-import User from "../models/user.js";
+import {status, ongoing, win, lose, terminated, pending} from "../constants/constants.js";
 import { updateUserTickets } from "./user.js";
 
 export const getCompetitions = async (req, res) => {
@@ -12,7 +12,7 @@ export const getCompetitions = async (req, res) => {
         const startIndex = (Number(page) - 1) * LIMIT; //the index to start the find()
         const total = await Competition.countDocuments({}); //number of total documents in the db
 
-        const competitions = await Competition.find().limit(LIMIT).skip(startIndex); //query, limit to LIMIT and skip the first LIMIT * page documents
+        const competitions = await Competition.find({status:ongoing}).limit(LIMIT).skip(startIndex); //query, limit to LIMIT and skip the first LIMIT * page documents
 
         res.status(200).json({data: competitions, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     } catch (err) {
@@ -30,7 +30,7 @@ export const getCompetitionsBySearch = async (req, res) => {
         const startIndex = (Number(page) - 1) * LIMIT;
         const total = await Competition.countDocuments({ $or: [{productName: query}, {productBrand: query}]});
 
-        const competitions = await Competition.find({ $or: [{productName: query}, {productBrand: query}]}).limit(LIMIT).skip(startIndex);
+        const competitions = await Competition.find({status:ongoing}).find({ $or: [{productName: query}, {productBrand: query}]}).limit(LIMIT).skip(startIndex);
         
         res.status(200).json({data: competitions, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     } catch (err) {
