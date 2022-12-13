@@ -9,6 +9,8 @@ const User = () => {
   return (
       <Typography>{user_data.result.address}</Typography>
   )
+
+  console.log("prova");
 }
 
 export default User
