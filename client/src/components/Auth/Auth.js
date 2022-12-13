@@ -3,18 +3,17 @@ import { useDispatch } from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-
-import Icon from './icon';
 import { signin, signup } from '../../actions/auth';
-import { AUTH } from '../../constants/actionType';
 import useStyles from './styles';
 import Input from './Input';
+import { useParams } from 'react-router-dom';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', country:'', city: '', address: '', cap:'' };
 
 const SignUp = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
+  const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -32,9 +31,9 @@ const SignUp = () => {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(form, history));
+      dispatch(signup(form, () => (id) ? history.push(`/competitions/${id}`) : history.push('/')));
     } else {
-      dispatch(signin(form, history));
+      dispatch(signin(form, () =>  (id) ? history.push(`/competitions/${id}`) : history.push('/')));
     }
   };
 

@@ -6,14 +6,17 @@ import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import Footer from "./components/Footer/Footer";
 import Form from "./components/Form/Form";
-import user from "./components/User/user";
+import User from "./components/User/User";
 import { useSelector } from "react-redux";
-import CompetitionsPage from "./components/Competitions/CompetitionsPage";
-import CompetitionDetails from "./components/CompetitionDetails/CompetitionDetails";
+import CompetitionsPage from "./components/CompetitionsPage/CompetitionsPage";
+import CompetitionPage from "./components/CompetitionPage/CompetitionPage"
+import Checkout from "./components/Checkout/Checkout";
+import About from "./components/About/About"; 
 
 const App = () => {
 
   const user_data = () => JSON.parse(localStorage.getItem('profile'))
+  const cart = () => JSON.parse(localStorage.getItem('cart'))
   const {mode} = useSelector((state) => state.mode); //from reducers
 
   const darkTheme = createTheme({
@@ -33,9 +36,12 @@ const App = () => {
               <Route path="/competitions" exact component={CompetitionsPage} />
               <Route path="/competitions/search" exact component={CompetitionsPage} />
               <Route path="/addcompetition" exact component={Form} />
-              <Route path="/competitions/:id"  component={CompetitionDetails} />
+              <Route path="/competitions/:id"  component={CompetitionPage} />
               <Route path="/auth" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
-              <Route path="/user" exact component={user} />
+              <Route path="/auth/beforebuy/:id" exact component={() => !user_data() ? <Auth/> : <Redirect to='/user'/>} />
+              <Route path="/user" exact component={User} />
+              <Route path="/about" exact component={About} />
+              <Route path="/checkout" exact component={() => (user_data() && cart()) ? <Checkout/> : <Redirect to='/'/>} />
             </Switch>
             <Footer mode={mode}/>
           </Box>

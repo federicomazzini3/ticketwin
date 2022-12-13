@@ -1,43 +1,54 @@
 import { Container } from '@mui/system'
 import React from 'react'
-import { Typography, Link } from '@mui/material'
+import { Typography, IconButton, Grid } from '@mui/material'
 import { setDarkMode, setLightMode } from '../../actions/mode'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-//onClick={e => setMode(mode === "light" ? "dark" : "light")}
+import { useLocation } from 'react-router-dom'
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+
 const Footer = ({ mode }) => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const location = useLocation();
 
-    return (
-        <Container maxWidth="md" component="footer"
-            sx={{
-                borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-                mt: 8,
-                py: [3, 6],
-            }}>
+    if (location.pathname !== '/')
+        return (
+            <Container maxWidth="md" component="footer"
+                sx={{
+                    borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+                    mt: 8,
+                    py: [3, 6],
+                }}>
 
-            <Link onClick={() => mode === "light" ? setDarkMode(dispatch) : setLightMode(dispatch)} >
-                <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5 }}>
-                    Switch to {mode === "light" ? "dark" : "light"} mode
-                </Typography>
-            </Link>
-            <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
-                Switch to daltonic mode
-            </Typography>
-            <Link onClick={() => history.push('/addcompetition')}>
-                <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
-                    [DEBUG] Add a new competition
-                </Typography>
-            </Link>
-            <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
-                {'Copyright © '}
-                TicketWin
-                {new Date().getFullYear()}
-                {'.'}
-            </Typography>
-        </Container>
-    )
+                <Grid container direction="row" justifyContent="space-between" alignItems="center">
+
+
+                    <Grid item xs={4}>
+                        <IconButton onClick={() => { }}>
+                            <ColorLensIcon></ColorLensIcon>
+                        </IconButton>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
+                            {'Copyright © '}
+                            TicketWin
+                            {new Date().getFullYear()}
+                            {'.'}
+                        </Typography>
+                    </Grid>
+
+                    <Grid item xs={4} textAlign={'right'}>
+                        <IconButton onClick={() => mode === "light" ? dispatch(setDarkMode(dispatch)) : dispatch(setLightMode(dispatch))}>
+                            {mode === "light" ? <DarkModeIcon></DarkModeIcon> : <LightModeIcon></LightModeIcon>}
+                        </IconButton>
+                    </Grid>
+
+                </Grid>
+            </Container>
+        )
+    else return (<></>)
 }
 
 export default Footer
