@@ -16,6 +16,7 @@ export const signin = (formData, redirect) => async (dispatch) => {
 export const signup = (formData, redirect) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
+    console.log(formData);
     dispatch({ type: AUTH, data });
     updateWithUser(data.result._id);
     redirect();

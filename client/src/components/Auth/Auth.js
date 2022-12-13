@@ -8,7 +8,7 @@ import useStyles from './styles';
 import Input from './Input';
 import { useParams } from 'react-router-dom';
 
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', country:'', city: '', address: '', cap:'' };
 
 const SignUp = () => {
   const [form, setForm] = useState(initialState);
@@ -38,7 +38,7 @@ const SignUp = () => {
   };
 
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {setForm({ ...form, [e.target.name]: e.target.value }); console.log(form)};
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,7 +58,21 @@ const SignUp = () => {
             <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
             <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
             { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
+            
+            { isSignup && (
+            <>
+              <Input name="country" label="Country" handleChange={handleChange} autoFocus half />
+              <Input name="city" label="City" handleChange={handleChange} half />
+              <Input name="address" label="Address" handleChange={handleChange} half />
+              <Input name="cap" label="CAP" handleChange={handleChange} half />
+            </>
+            )}
           </Grid>
+
+          
+            
+
+
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             { isSignup ? 'Sign Up' : 'Sign In' }
           </Button>
