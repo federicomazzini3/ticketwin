@@ -46,6 +46,18 @@ export const signup = async (req, res) => {
     }
 }
 
+export const getUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const existingUser = await User.findById(id);
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', { expiresIn: "1h"});
+
+        res.status(200).json({ result: existingUser, token })
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const updateUserTickets = async (competition, tickets) => {
     try{
         const user = await User.findById(tickets[0].owner)

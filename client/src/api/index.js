@@ -22,3 +22,4 @@ export const buyTicket = (id, tickets) => API.post(`/competitions/${id}/buy`, ti
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
+export const fetchUser = (id) => API.get(`/user/${id}`);

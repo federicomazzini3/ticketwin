@@ -7,6 +7,7 @@ import { signin, signup } from '../../actions/auth';
 import useStyles from './styles';
 import Input from './Input';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', country:'', city: '', address: '', cap:'' };
 
@@ -31,14 +32,22 @@ const SignUp = () => {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(form, () => (id) ? history.push(`/competitions/${id}`) : history.push('/')));
+      if(form.password == form.confirmPassword){
+        dispatch(signup(form, () => (id) ? history.push(`/competitions/${id}`) : history.push('/')));
+      } else {
+        alert('Le password non corrispondono')
+      }
     } else {
       dispatch(signin(form, () =>  (id) ? history.push(`/competitions/${id}`) : history.push('/')));
     }
   };
 
 
-  const handleChange = (e) => {setForm({ ...form, [e.target.name]: e.target.value }); console.log(form)};
+  const handleChange = (e) => {setForm({ ...form, [e.target.name]: e.target.value })};
+
+
+
+  const { authData } = useSelector((state) => state.auth);
 
   return (
     <Container component="main" maxWidth="xs">

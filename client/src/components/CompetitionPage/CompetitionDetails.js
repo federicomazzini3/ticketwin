@@ -19,7 +19,7 @@ const CompetitionDetails = ({competition}) => {
                 <Typography variant='h5' textAlign={responsiveAlign()}>{competition.productBrand}</Typography>
                 <Typography  sx={{ textDecoration: 'line-through' }} textAlign={responsiveAlign()}>{competition.productPrice}€</Typography>
                 <Typography textAlign={responsiveAlign()}>{competition.ticketPrice}€</Typography>
-                <Typography textAlign={responsiveAlign()}>{competition.maxTicketNumber} ticket rimasti</Typography>
+                <Typography textAlign={responsiveAlign()}>{competition.maxTicketNumber - competition.tickets.length} ticket rimasti</Typography>
             </Grid>
         </>
     )

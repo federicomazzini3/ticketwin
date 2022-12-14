@@ -60,6 +60,7 @@ export const clearCart = () => (dispatch) => {
   dispatch({type:CLEAR_CART})
 }
 
+//quando un utente si logga, gli item che aveva nel carrello passano a suo nome
 export const updateWithUser = (userId) => {
   const data = JSON.parse(localStorage.getItem('cart'));
   if (data){

@@ -17,6 +17,7 @@ export const END_LOADING = 'END_LOADING';
 
 export const AUTH = 'AUTH'
 export const LOGOUT = 'LOGOUT'
+export const FETCH_USER = 'FETCH_USER'
 
 export const DARK = 'DARK'
 export const LIGHT = 'LIGHT'
