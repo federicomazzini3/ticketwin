@@ -1,6 +1,6 @@
-import {AUTH, LOGOUT, FETCH_USER} from '../constants/actionType';
+import {AUTH, LOGOUT, FETCH_USER, UPDATE} from '../constants/actionType';
 
-const authReducer = (state = {authData: null}, action) => {
+const authReducer = (state = {authData: null, users: []}, action) => {
     switch(action.type) {
         case AUTH:
             localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
@@ -11,6 +11,8 @@ const authReducer = (state = {authData: null}, action) => {
         case FETCH_USER:
             localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
             return { ...state, authData: action?.data };
+        case UPDATE:  
+            return {...state, users: state.users.map((user) => user._id === action.data._id ? action.data : user)}
         default:
             return state; 
     }

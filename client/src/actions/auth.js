@@ -1,4 +1,4 @@
-import { AUTH, FETCH_USER } from '../constants/actionType';
+import { AUTH, FETCH_USER, UPDATE } from '../constants/actionType';
 import * as api from '../api/index.js';
 import { updateWithUser } from './cart';
 
@@ -30,5 +30,14 @@ export const getUser = (id) => async (dispatch) => {
       dispatch({type: FETCH_USER, data});
   } catch (err) {
       console.log(err.message)
+  }
+}
+
+export const updateUser = (id, user) => async(dispatch) => {
+  try {
+      const {data} = await api.updateUser(id, user);
+      dispatch({ type: UPDATE, data})
+  } catch (err) {
+      console.log(err);
   }
 }

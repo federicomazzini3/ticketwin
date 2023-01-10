@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'; //accedere allo stato dell'applicazione globalmente
+import { Provider } from 'react-redux'; //Permette di accedere allo stato dell'applicazione globalmente
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 

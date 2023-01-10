@@ -4,9 +4,8 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import competitionsRoutes from './routes/competitions.js'
-
-import postRoutes from './routes/competitions.js';
 import userRoutes from './routes/users.js';
+import { rescheduleDraw } from './middleware/draw.js'
 
 const app = express();
 dotenv.config();
@@ -24,4 +23,5 @@ const CONNECTION_URL = process.env.CONNECTION_URL
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
+  .then(() => rescheduleDraw())
   .catch((error) => console.log(`${error} did not connect`));

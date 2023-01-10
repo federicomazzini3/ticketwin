@@ -1,13 +1,15 @@
-import { Grid, Typography, Box, ButtonBase } from '@mui/material'
+import { Grid, Typography, Box, ButtonBase, Button, ButtonGroup, TextField, InputAdornment, IconButton } from '@mui/material'
 import React from 'react'
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { getUser } from '../../actions/auth';
+import { getUser, updateUser } from '../../actions/auth';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { borderColor } from '@mui/system';
 import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { Visibility as VisibilityIcon, VisibilityOff as VisibilityOffIcon } from '@mui/icons-material';
 
 const User = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,12 @@ const User = () => {
   const { authData } = useSelector((state) => state.auth);
   const theme = useTheme();
   const isMatchMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [buttonText, setButtonText] = useState("Modifica Dati Utente"); 
+  const [userData, setUserData] = useState({ name: user_data.result.name, email: user_data.result.email, password: '', address: user_data.result.address });
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   const responsiveAlign = () => {
     if (isMatchMobile === true) return 'center'
@@ -53,32 +61,105 @@ const User = () => {
   useEffect(() => {
     dispatch(getUser(user_data?.result._id))
   }, []);
+  
 
-  return (
+  const handleClick = () => {
+    setIsEditing(!isEditing); // Inverti lo stato di isEditing
+    setButtonText(isEditing ? "Modifica Dati Utente" : "Salva Modifiche"); // Aggiorna il testo del Button in base allo stato di isEditing
+  }
+
+  const clear = () => {
+    setUserData({...userData, password: ''})
+  }
+
+  // Aggiungi la funzione per gestire il submit del form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // controlla se ci sono errori nei campi
+    if((userData.name) && (userData.password) && (userData.address)){
+      dispatch(updateUser(user_data?.result._id, userData)).then(() => {dispatch(getUser(user_data?.result._id))});
+      setIsEditing(!isEditing); // Inverti lo stato di isEditing
+      setButtonText(isEditing ? "Modifica Dati Utente" : "Salva Modifiche"); // Aggiorna il testo del Button in base allo stato di isEditing
+      clear()
+      }
+    else{
+        alert('Tutti i campi devono essere compilati')
+    }
+  }
+
+return (
     <Grid container sx={{ p: 10 }}>
 
       <Grid item xs={12} sm={8} sx={{mb:3}}>
-          <Typography variant='h3' textAlign={responsiveAlign()}>Il mio account</Typography>
-        </Grid>
+        <Typography variant='h3' textAlign={responsiveAlign()}>Il mio account</Typography>
+      </Grid>
 
       <Grid item xs={12} sm={8} sx={{ml:1}}>
         <Typography variant='h5' textAlign={responsiveAlign()}>Name</Typography>
-        <Typography textAlign={responsiveAlign()}>{user_data.result.name}</Typography>
+        {isEditing ? (
+          // Mostra un input per modificare il testo quando isEditing è vero
+          <TextField sx={{ mt: 1 }} name="name" variant="outlined" label="Name" fullWidth value={userData.name} onChange={(e) => setUserData({ ...userData, name: e.target.value })} />
+        ) : (
+          // Altrimenti, mostra solo il testo
+          <Typography textAlign={responsiveAlign()}>{user_data.result.name}</Typography>
+        )}
       </Grid>
 
-      <Grid item xs={12} sm={8} sx={{ pt: 5, ml:1 }}>
-        <Typography variant='h5' textAlign={responsiveAlign()}>Password</Typography>
-        <Typography textAlign={responsiveAlign()}>*********************</Typography>
+      <Grid item xs={12} sm={8} sx={{ pt: 5, ml: 1 }}>
+        <Typography variant="h5" textAlign={responsiveAlign()}>Password</Typography>
+        {isEditing ? (
+          // Mostra un input per modificare il testo quando isEditing è vero
+          <TextField 
+            sx={{ mt: 1 }} 
+            type={showPassword ? 'text' : 'password'} 
+            name="password" 
+            variant="outlined" 
+            label="Password" 
+            fullWidth 
+            value={userData.password} 
+            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword}>
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        ) : (
+          // Altrimenti, mostra solo il testo
+          <Typography textAlign={responsiveAlign()}>*********************</Typography>
+        )}
       </Grid>
 
       <Grid item xs={12} sm={8} sx={{ pt: 5, ml:1  }}>
-        <Typography variant='h5' textAlign={responsiveAlign()}>E-mail</Typography>
-        <Typography textAlign={responsiveAlign()}>{user_data.result.email}</Typography>
+          <Typography variant='h5' textAlign={responsiveAlign()}>E-mail</Typography>
+          <Typography textAlign={responsiveAlign()}>{user_data.result.email}</Typography>
+          <div style={{height: '16px'}} />
+      </Grid>
+
+      <Grid item xs={12} sm={8} sx={{ pt: 5, ml: 1 }}>
+        <Typography variant="h5" textAlign={responsiveAlign()}>Address</Typography>
+        {isEditing ? (
+          // Mostra un input per modificare il testo quando isEditing è vero
+          <TextField sx={{ mt: 1 }} name="address" variant="outlined" label="Address" fullWidth value={userData.address} onChange={(e) => setUserData({ ...userData, address: e.target.value })} />
+        ) : (
+          // Altrimenti, mostra solo il testo
+          <Typography textAlign={responsiveAlign()}>{user_data.result.address}</Typography>
+        )}
       </Grid>
 
       <Grid item xs={12} sm={8} sx={{ pt: 5, ml:1  }}>
-        <Typography variant='h5' textAlign={responsiveAlign()}>Address</Typography>
-        <Typography textAlign={responsiveAlign()}>{user_data.result.address}</Typography>
+      {buttonText === "Modifica Dati Utente" ? (
+        <Button variant="contained" color="primary" onClick={handleClick}>{buttonText}</Button>
+      ) : (
+        <ButtonGroup>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>{buttonText}</Button>
+          {isEditing && <Button variant="contained" color="error" onClick={handleClick}>Annulla</Button>}
+        </ButtonGroup>
+      )}
       </Grid>
 
       {(authData?.result?.tickets?.length > 0) && (
@@ -101,6 +182,9 @@ const User = () => {
             <Grid item xs={6}>
               <Typography variant='h5'>{ticket.productName}</Typography>
               <Typography>{ticket.productBrand}</Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant='h5'>{ticket.status}</Typography>
             </Grid>
             <Grid item xs={2} textAlign='right'>
               <Typography variant='h4'>#{ticket.number}</Typography>

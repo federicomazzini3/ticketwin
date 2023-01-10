@@ -1,4 +1,4 @@
-import {FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_COMPETITION, SEARCH, START_LOADING, END_LOADING, BUY} from '../constants/actionType';
+import {FETCH_ALL, CREATE, UPDATE, DELETE, FETCH_COMPETITION, SEARCH, START_LOADING, END_LOADING, BUY, UPDATE_TICKET} from '../constants/actionType';
 
 export default (state = {isLoading: true, competitions: []}, action) => {
     switch (action.type) {
