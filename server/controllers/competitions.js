@@ -45,12 +45,11 @@ export const createCompetition = async (req, res) => {
 
     var now = new Date();
     var deadline = newCompetition.deadline
-    //deadline.setHours(deadline.getHours() - 1);
 
     var millisToDeadline = deadline - now
     
     console.log("now: " + now.toString())
-    console.log("deadline: " + deadline.toString())
+    console.log("deadline competizione creata: " + deadline.toString())
     console.log(millisToDeadline)
     
     setTimeout(() => {
@@ -81,8 +80,6 @@ export const updateCompetition = async (req, res) => {
     const competition = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No competitions with that id');
-
-    console.log("Sono nel server", competition) //da togliere
 
     const updatedCompetition = await Competition.findByIdAndUpdate(id, competition, {new: true})
 

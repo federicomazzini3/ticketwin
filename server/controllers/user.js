@@ -81,19 +81,16 @@ export const updateUserTickets = async (competition, tickets) => {
 export const updateUser = async (req, res) => {
     const { id } = req.params;
     try{
-        if (req.body.hasOwnProperty('password')){
             const user = req.body;
             const hashedPassword = await bcrypt.hash(user.password, 12);
             user.password = hashedPassword;
 
             if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No user with that id');
-
-            console.log("Sono l'update dell'utente: ", user) //da togliere 
             
             const updatedUser = await User.findByIdAndUpdate(id, user, {new: true});
 
             res.json({updatedUser})
-        }/*else{
+        /*else{
             const utente = await User.findById(id);
             console.log("ticket dell'utente: ", utente.tickets);
             const ticketsUtente = utente.tickets;

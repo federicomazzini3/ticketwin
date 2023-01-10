@@ -8,8 +8,8 @@ import Tickets from './Tickets/Tickets'
 import Summary from './Summary'
 import CompetitionDetails from './CompetitionDetails'
 import Progress from './Progress'
-import moment from 'moment'
 import { useHistory } from 'react-router-dom';
+import {green} from '@mui/material/colors';
 
 
 const CompetitionPage = () => {
@@ -36,9 +36,9 @@ const CompetitionPage = () => {
     <Container sx={{ mt: 10, height: '100%', display: 'flex', flexDirection: 'column', py: 8, p: 3 }} maxWidth="md">
       <Grid container>
         <CompetitionDetails competition={competition}></CompetitionDetails>
-        {((competition.status == 'ongoing') && (terminated == false)) && ( // mostra i Tickets solo se il countdown non è finito -> todo: modificare con terminated
+        {((competition.status == 'ongoing') && (terminated == false)) && (
         <>
-            <Countdown deadline={competition?.deadline} competition={competition} terminated = {terminated} setTerminated = {setTerminated}></Countdown>
+            <Countdown deadline={competition?.deadline} terminated={terminated} setTerminated={setTerminated}></Countdown>
             <Progress maxTicketNumber={competition.maxTicketNumber} ticketSoldNumber={competition.tickets.length}></Progress>
             <Summary price={competition?.ticketPrice} id={competition._id}></Summary>
             <Tickets competition={competition} cart={cart} setCart={setCart}></Tickets>
@@ -51,7 +51,11 @@ const CompetitionPage = () => {
             <Grid item xs={12}>
                <Typography  variant='h3'>La competizione è terminata.</Typography>
                {(competition.tickets.find(tw => tw.status === "win")?.number) && (
-                <Typography  variant='h3'>Il ticket vincente è il: {competition.tickets.find(tw => tw.status === "win")?.number}</Typography>
+                <Typography  variant='h3'>Il ticket vincente è il numero: 
+                  <span style={{ color:green[500], marginLeft: "8px" }}>
+                    {competition.tickets.find(tw => tw.status === "win")?.number}
+                  </span>
+                </Typography>
                )}
             </Grid>
           </Grid>

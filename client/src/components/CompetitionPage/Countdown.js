@@ -3,15 +3,11 @@ import { Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCompetition } from '../../actions/competitions';
-import { updateUser } from '../../actions/auth';
-import { useHistory } from 'react-router-dom';
 
-const CountdownComponent = ({deadline, competition, terminated, setTerminated}) => {
+const CountdownComponent = ({deadline, terminated, setTerminated}) => {
   const dispatch = useDispatch();
   const countDownDate = new Date(deadline);
   const [countDown, setCountDown] = useState(countDownDate - new Date());
-  const [updatedCompetition, setUpdatedCompetition] = useState(false);
-  const history = useHistory();
 
   const [days, hours, minutes, seconds] = getReturnValues(countDown)
 
