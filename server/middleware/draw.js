@@ -18,7 +18,6 @@ export const rescheduleDraw = async () => {
     });
 }
 
-
 export const drawCompetition = async (id) => {
     
     try{
@@ -44,8 +43,6 @@ export const drawCompetition = async (id) => {
 
             var loserTickets = tickets.filter(ticket => ticket !== winnerTicket);
 
-            //TODO: CONTROLLARE QUESTO IF: Nel caso si acquisti un unico ticket per una competizione, senza controllo prova a fare il foreach e crasha
-            //if(loserTickets.length > 0){
                 loserTickets.forEach(async (ticket) => {
                     ticket.status = lose
                     var loserUser = await User.findById(ticket.owner)
@@ -65,13 +62,7 @@ export const drawCompetition = async (id) => {
         
             var updatedTickets = [winnerTicket, ...loserTickets];
             competitionToUpdate.tickets = updatedTickets;
-            console.log("La competizione aggiornata: " ,competitionToUpdate)
             await Competition.findByIdAndUpdate(competitionToUpdate._id, competitionToUpdate, { new: true });
-           // } 
-
-           /* competitionToUpdate.ticket = winnerTicket;
-            await Competition.findByIdAndUpdate(competitionToUpdate._id, competitionToUpdate, { new: true });*/
-
         }
         
         await Competition.findByIdAndUpdate(id, competitionToUpdate, { new: true });
