@@ -36,9 +36,7 @@ export const drawCompetition = async (id) => {
                 if((ticket.competition.equals(competitionToUpdate._id)) && (ticket.number === winnerTicket.number)){
                     return {...ticket, status: win};
                 } 
-                 else {
-                    return ticket;
-               }
+                 else { return ticket; }
             })
 
             winnerUser.tickets = newUserTickets;
@@ -47,15 +45,17 @@ export const drawCompetition = async (id) => {
             var loserTickets = tickets.filter(ticket => ticket !== winnerTicket);
 
             //TODO: CONTROLLARE QUESTO IF: Nel caso si acquisti un unico ticket per una competizione, senza controllo prova a fare il foreach e crasha
-            if(loserTickets.length > 0){
+            //if(loserTickets.length > 0){
                 loserTickets.forEach(async (ticket) => {
                     ticket.status = lose
                     var loserUser = await User.findById(ticket.owner)
                     const newUserLoseTickets = loserUser.tickets.map(ticketUtente => {
-                        if((ticketUtente.competition.equals(competitionToUpdate._id)) && (ticketUtente.number === ticket.number)){
+                        if((ticketUtente.competition.equals(competitionToUpdate._id)) && (ticketUtente.number !== winnerTicket.number)){
                             return {...ticketUtente, status: lose};
                         } 
-                        else return ticketUtente;
+                        else if((ticketUtente.competition !== competitionToUpdate._id)){
+                          return ticketUtente; 
+                        }
                     })
 
                     loserUser.tickets = newUserLoseTickets;
@@ -64,12 +64,13 @@ export const drawCompetition = async (id) => {
             
         
             var updatedTickets = [winnerTicket, ...loserTickets];
-            competitionToUpdate.ticket = updatedTickets;
+            competitionToUpdate.tickets = updatedTickets;
+            console.log("La competizione aggiornata: " ,competitionToUpdate)
             await Competition.findByIdAndUpdate(competitionToUpdate._id, competitionToUpdate, { new: true });
-            } 
+           // } 
 
-            competitionToUpdate.ticket = winnerTicket;
-            await Competition.findByIdAndUpdate(competitionToUpdate._id, competitionToUpdate, { new: true });
+           /* competitionToUpdate.ticket = winnerTicket;
+            await Competition.findByIdAndUpdate(competitionToUpdate._id, competitionToUpdate, { new: true });*/
 
         }
         
