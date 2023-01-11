@@ -22,7 +22,7 @@ const CountdownComponent = ({deadline, terminated, setTerminated}) => {
     return () => clearInterval(interval);
   }, [countDownDate, days, hours, minutes, seconds, terminated]);
 
-  if(minutes <= 0 ){
+  if((days <= 0) && (hours <= 0) && (minutes <= 0)){
     return (
       <Grid container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
       <Grid item xs={12}>

@@ -25,11 +25,11 @@ const CompetitionPage = () => {
   }, [id]);
 
   if (isLoading) return (
-    <CircularProgress />
+    <CircularProgress aria-label={`Loading`}/>
   )
 
   if (!competition) return (
-    <Typography variant='h3'> Competition not found </Typography>
+    <Typography variant='h3' aria-live={`polite`}> Competition not found </Typography>
   )
 
   return (
@@ -49,9 +49,9 @@ const CompetitionPage = () => {
           <> 
            <Grid container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
             <Grid item xs={12}>
-               <Typography  variant='h3'>La competizione è terminata.</Typography>
+               <Typography variant='h3' aria-live={`polite`}>La competizione è terminata.</Typography>
                {(competition.tickets.find(tw => tw.status === "win")?.number) && (
-                <Typography  variant='h3'>Il ticket vincente è il numero: 
+                <Typography  variant='h3' aria-live={`polite`}>Il ticket vincente è il numero: 
                   <span style={{ color:green[500], marginLeft: "8px" }}>
                     {competition.tickets.find(tw => tw.status === "win")?.number}
                   </span>
@@ -65,11 +65,11 @@ const CompetitionPage = () => {
           <> 
           <Grid container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
             <Grid item xs={12}>
-              <Typography variant='h3'>La competizione è terminata.</Typography>
+              <Typography variant='h3' aria-live={`polite`}>La competizione è terminata.</Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 10, mb: -3, width: "100%", alignItems: 'center', justifyItems: 'center' }}>
               <Stack direction="row" spacing={2} justifyContent="center" >
-                <Button variant='contained' size='large' onClick={() => window.location.reload(false)} >
+                <Button variant='contained' size='large' onClick={() => window.location.reload(false)} aria-label={`Show Winner`} >
                   Visualizza il Vincitore
                 </Button>
               </Stack>
