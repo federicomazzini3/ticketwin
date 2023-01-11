@@ -69,7 +69,7 @@ const CompetitionPage = () => {
             </Grid>
             <Grid item xs={12} sx={{ mt: 10, mb: -3, width: "100%", alignItems: 'center', justifyItems: 'center' }}>
               <Stack direction="row" spacing={2} justifyContent="center" >
-                <Button variant='contained' size='large' onClick={() => history.push(`/competitions/${competition._id}`)} >
+                <Button variant='contained' size='large' onClick={() => window.location.reload(false)} >
                   Visualizza il Vincitore
                 </Button>
               </Stack>
@@ -83,5 +83,3 @@ const CompetitionPage = () => {
 }
 
 export default CompetitionPage;
-
-//Se non funziona: <Button variant='contained' size='large' onClick={() => window.location.reload(false)} >
