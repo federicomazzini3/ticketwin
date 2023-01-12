@@ -24,12 +24,12 @@ const CountdownComponent = ({deadline, terminated, setTerminated}) => {
 
   if((days <= 0) && (hours <= 0) && (minutes <= 0)){
     return (
-      <Grid container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
-      <Grid item xs={12}>
-        <Typography variant='h1'>{(seconds) ? seconds : '0'}</Typography>
-        <Typography>secondi restanti</Typography>
+      <Grid tabIndex={0} aria-label={"Less than a minute left"} container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
+        <Grid item xs={12}>
+          <Typography variant='h1'>{(seconds) ? seconds : '0'}</Typography>
+          <Typography>secondi restanti</Typography>
+        </Grid>
       </Grid>
-    </Grid>
     )
   }
 
@@ -49,7 +49,7 @@ const CountdownComponent = ({deadline, terminated, setTerminated}) => {
   }*/
 
   return (
-    <Grid container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
+        <Grid tabIndex={0} aria-label={`Competition countdown: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`} container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
           <Grid item xs={3}>
             <Typography variant='h5'>{(days) ? days : '0'}</Typography>
             <Typography>giorni</Typography>

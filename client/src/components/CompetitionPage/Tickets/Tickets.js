@@ -15,7 +15,7 @@ const Tickets = ({ competition, setCart }) => {
     },[])
 
     return (
-        <Grid container item xs={12} spacing={3} sx={{ mt: 10 }}>
+        <Grid tabIndex={0} container item xs={12} spacing={3} sx={{ mt: 10 }}>
             {Array.from({ length: competition.maxTicketNumber }, (_, i) => i + 1).map((ticket) => (
                 (competition.tickets.find(ticketSold => ticketSold.number === ticket) &&
                     <Ticket key={ticket} status={'unavailable'} ticketNumber={ticket} competition={competition}></Ticket>) ||

@@ -56,11 +56,11 @@ const Summary = ({ price, id }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle tabIndex={0} id="alert-dialog-title" aria-label={"Login Required to buy tickets"}>
           Login required
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText tabIndex={0} id="alert-dialog-description" aria-label={"You must be logged to buy tickets"}>
             You must be logged to buy tickets
           </DialogContentText>
         </DialogContent>

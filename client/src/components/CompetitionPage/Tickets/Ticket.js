@@ -23,8 +23,9 @@ const Ticket = ({ status, competition, ticketNumber }) => {
     
     if (status === 'available') return (
         <Grid item xs={3} sm={2} md={1}>
-            <Box onClick={() => onClickAvailableTicket()}
+            <Box onClick={() => onClickAvailableTicket()} onKeyPress={event => event.key === 'Enter' && onClickAvailableTicket()}
                 aria-label = {`ticket number ${ticketNumber} is available for competition: ${competition.productName}. Click to add to cart.`}
+                tabIndex={0}
                 sx={{
                     borderStyle: "solid",
                     textAlign: 'center',
@@ -40,8 +41,9 @@ const Ticket = ({ status, competition, ticketNumber }) => {
 
     if (status === 'clicked') return (
         <Grid item xs={3} sm={2} md={1}>
-            <Box onClick={() => onClickReservedTicket()}
+            <Box onClick={() => onClickReservedTicket()} onKeyPress={event => event.key === 'Enter' && onClickReservedTicket()}
                 aria-label = {`ticket number ${ticketNumber} is already in the cart for competition: ${competition.productName}. Click to romevo from cart.`}
+                tabIndex={0}
                 sx={{
                     borderStyle: "solid",
                     textAlign: 'center',
@@ -57,6 +59,7 @@ const Ticket = ({ status, competition, ticketNumber }) => {
         <Grid item xs={3} sm={2} md={1}>
             <Box onClick={() => onClickUnavailableTicket()}
                 aria-label = { `ticket number ${ticketNumber} is unavailable for competition: ${competition.productName}. Ticket already sold`}
+                tabIndex={0}
                 sx={{
                     borderStyle: "solid",
                     textAlign: 'center',
