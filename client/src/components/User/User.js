@@ -31,7 +31,6 @@ const User = () => {
   }
 
   const borderColor = (status) => {
-    console.log(status)
     switch (status) {
       case 'win':
         return 'rgb(60, 179, 113)'
@@ -45,7 +44,6 @@ const User = () => {
   }
 
   const backgroundColor = (status) => {
-    console.log(status)
     switch (status) {
       case 'win':
         return 'rgba(60, 179, 113, .3)'
@@ -90,22 +88,22 @@ const User = () => {
 return (
     <Grid container sx={{ p: 10 }}>
 
-      <Grid item xs={12} sm={8} sx={{mb:3}}>
+      <Grid tabIndex={0} item xs={12} sm={8} sx={{mb:3}}>
         <Typography variant='h3' textAlign={responsiveAlign()}>Il mio account</Typography>
       </Grid>
 
-      <Grid item xs={12} sm={8} sx={{ml:1}}>
+      <Grid tabIndex={0} item xs={12} sm={8} sx={{ml:1}}>
         <Typography variant='h5' textAlign={responsiveAlign()}>Name</Typography>
         {isEditing ? (
           // Mostra un input per modificare il testo quando isEditing è vero
-          <TextField sx={{ mt: 1 }} name="name" variant="outlined" label="Name" fullWidth value={userData.name} onChange={(e) => setUserData({ ...userData, name: e.target.value })} />
+          <TextField sx={{ mt: 1 }} name="name" variant="outlined" label="Name" aria-label={"Type something to modify"} fullWidth value={userData.name} onChange={(e) => setUserData({ ...userData, name: e.target.value })} />
         ) : (
           // Altrimenti, mostra solo il testo
           <Typography textAlign={responsiveAlign()}>{user_data.result.name}</Typography>
         )}
       </Grid>
 
-      <Grid item xs={12} sm={8} sx={{ pt: 5, ml: 1 }}>
+      <Grid tabIndex={0} item xs={12} sm={8} sx={{ pt: 5, ml: 1 }}>
         <Typography variant="h5" textAlign={responsiveAlign()}>Password</Typography>
         {isEditing ? (
           // Mostra un input per modificare il testo quando isEditing è vero
@@ -116,12 +114,13 @@ return (
             variant="outlined" 
             label="Password" 
             fullWidth 
+            aria-label={"Type something to modify"}
             value={userData.password} 
             onChange={(e) => setUserData({ ...userData, password: e.target.value })}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword}>
+                  <IconButton aria-label={"Show password"} onClick={handleShowPassword}>
                     {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                   </IconButton>
                 </InputAdornment>
@@ -134,17 +133,17 @@ return (
         )}
       </Grid>
 
-      <Grid item xs={12} sm={8} sx={{ pt: 5, ml:1  }}>
+      <Grid tabIndex={0} item xs={12} sm={8} sx={{ pt: 5, ml:1  }}>
           <Typography variant='h5' textAlign={responsiveAlign()}>E-mail</Typography>
           <Typography textAlign={responsiveAlign()}>{user_data.result.email}</Typography>
           <div style={{height: '16px'}} />
       </Grid>
 
-      <Grid item xs={12} sm={8} sx={{ pt: 5, ml: 1 }}>
+      <Grid tabIndex={0} item xs={12} sm={8} sx={{ pt: 5, ml: 1 }}>
         <Typography variant="h5" textAlign={responsiveAlign()}>Address</Typography>
         {isEditing ? (
           // Mostra un input per modificare il testo quando isEditing è vero
-          <TextField sx={{ mt: 1 }} name="address" variant="outlined" label="Address" fullWidth value={userData.address} onChange={(e) => setUserData({ ...userData, address: e.target.value })} />
+          <TextField aria-label={"Type something to modify"} sx={{ mt: 1 }} name="address" variant="outlined" label="Address" fullWidth value={userData.address} onChange={(e) => setUserData({ ...userData, address: e.target.value })} />
         ) : (
           // Altrimenti, mostra solo il testo
           <Typography textAlign={responsiveAlign()}>{user_data.result.address}</Typography>
@@ -163,13 +162,13 @@ return (
       </Grid>
 
       {(authData?.result?.tickets?.length > 0) && (
-        <Grid item xs={12} sm={8} sx={{ pt: 5, pb: 3 }}>
+        <Grid tabIndex={0} item xs={12} sm={8} sx={{ pt: 5, pb: 3 }}>
           <Typography variant='h3' textAlign={responsiveAlign()}>I miei ticket</Typography>
         </Grid>
       )}
 
       {authData?.result.tickets.map(ticket => (
-        <Grid item xs={12} key={ticket._id}
+        <Grid tabIndex={0} item xs={12} key={ticket._id}
           sx={{
             borderStyle: 'solid', mb: 10, p: 3, borderColor: borderColor(ticket.status), borderWidth: 6, borderRadius: 3,
             '&:hover': {
@@ -177,7 +176,12 @@ return (
               cursor: 'pointer'
             }
           }}
-          onClick={() => history.push(`/competitions/${ticket.competition}`)}>
+          onClick={() => history.push(`/competitions/${ticket.competition}`)}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+                history.push(`/competitions/${ticket.competition}`);
+            }
+         }}>
           <Grid container item xs={12} direction='row' justifyContent='space-between' alignItems='center'>
             <Grid item xs={6}>
               <Typography variant='h5'>{ticket.productName}</Typography>

@@ -8,10 +8,10 @@ import Grid from '@mui/material/Grid';
 export default function Review({addressData, paymentData, cart}) {
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography tabIndex={0} aria-label={"Order Summary"} variant="h6" gutterBottom>
         Order summary
       </Typography>
-      <List disablePadding>
+      <List tabIndex={0} disablePadding>
         {cart[0].tickets.map((ticket) => (
           <ListItem key={ticket.number} sx={{ py: 1, px: 0 }}>
             <ListItemText primary={cart[0].productName} secondary={`Ticket #${ticket.number}`} />
@@ -27,14 +27,14 @@ export default function Review({addressData, paymentData, cart}) {
         </ListItem>
       </List>
       <Grid container spacing={2}> 
-        <Grid item xs={12} sm={6}>
+        <Grid tabIndex={0} item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography> 
           <Typography gutterBottom>{`${addressData.firstName} ${addressData.lastName}`}</Typography>
           <Typography gutterBottom>{`${addressData.city}, ${addressData.address1}, ${addressData.zip}, ${addressData.state}, ${addressData.country}`}</Typography>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid tabIndex={0} item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment detail
           </Typography> 

@@ -11,7 +11,7 @@ const Competitions = () => {
     if (isLoading) return <CircularProgress />
 
     if (!isLoading) return (
-        <Grid container spacing={4}>
+        <Grid tabIndex={0} aria-label={"Competitions Ongoin"} container spacing={4}>
             {competitions.map((competition) => (
                 <Grid key={competition._id} item xs={6} sm={4} md={3}>
                     <Competition competition={competition}></Competition>

@@ -33,11 +33,11 @@ const SearchBar = () => {
     return (
         <AppBar position='static' color='inherit' sx={{ mb: 2, borderRadius: 5, p: 2, pt: 1 }}>
             <Grid container justify={"space-between"} alignItems='center' direction={'row'}>
-            <Grid container item xs={11}>
+            <Grid tabIndex={0} aria-label={"Search Bar: type something and click enter to search competitions"} container item xs={11}>
                 <TextField name='search' variant='standard' label='Search...' fullWidth value={search} onChange={(e) => { setSearch(e.target.value) }} onKeyDown={onEnterButton} />
             </Grid>
             <Grid container item xs={1}>
-                <IconButton onClick={searchCompetitions}><SearchIcon fontSize='large'></SearchIcon></IconButton>
+                <IconButton aria-label={"Search Icon"} onClick={searchCompetitions}><SearchIcon fontSize='large'></SearchIcon></IconButton>
             </Grid>
             </Grid>
         </AppBar>

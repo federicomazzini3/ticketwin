@@ -44,7 +44,7 @@ const Navbar = () => {
     <AppBar position="static" color="default" elevation={0} sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}>
       <Toolbar sx={{ flexWrap: 'wrap' }}>
 
-        <Typography variant="h5" color="inherit" noWrap sx={{ flexGrow: 1, textDecoration: 'none' }} component={Link} to="/">
+        <Typography aria-label={"TicketWin: go to the HomePage"} variant="h5" color="inherit" noWrap sx={{ flexGrow: 1, textDecoration: 'none' }} component={Link} to="/">
           TicketWin
         </Typography>
 
