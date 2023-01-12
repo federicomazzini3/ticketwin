@@ -7,7 +7,7 @@ export default function AddressForm({addressData, setAddressData, addressDataErr
 
   return (
     <React.Fragment>
-      <Typography tabIndex={0} aria-label={"Shipping Address"} variant="h6" gutterBottom>
+      <Typography tabIndex={0} aria-label={"Shipping Address: please, fill all fields"} variant="h6" gutterBottom>
         Shipping address
       </Typography>
       <Grid container spacing={3}>

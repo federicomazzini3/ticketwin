@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 export default function PaymentForm({paymentData, setPaymentData, paymentDataErrors, setPaymentDataErrors}) {
   return (
     <React.Fragment>
-      <Typography tabIndex={0} aria-label={"Payment Method"} variant="h6" gutterBottom>
+      <Typography tabIndex={0} aria-label={"Payment Method: please, fill all fields"} variant="h6" gutterBottom>
         Payment method
       </Typography>
       <Grid container spacing={3}>
