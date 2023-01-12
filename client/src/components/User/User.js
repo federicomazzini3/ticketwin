@@ -10,6 +10,7 @@ import { borderColor } from '@mui/system';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { Visibility as VisibilityIcon, VisibilityOff as VisibilityOffIcon } from '@mui/icons-material';
+import Alert from '@mui/material/Alert';
 
 const User = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ const User = () => {
   const [userData, setUserData] = useState({ name: user_data.result.name, email: user_data.result.email, password: '', address: user_data.result.address });
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const [open, setOpen] = useState(false);
 
   const responsiveAlign = () => {
     if (isMatchMobile === true) return 'center'
@@ -75,13 +78,14 @@ const User = () => {
     e.preventDefault();
     // controlla se ci sono errori nei campi
     if((userData.name) && (userData.password) && (userData.address)){
-      dispatch(updateUser(user_data?.result._id, userData)).then(() => {dispatch(getUser(user_data?.result._id))});
+      dispatch(updateUser(user_data?.result._id, userData)).then(() => dispatch(getUser(user_data?.result._id)));
       setIsEditing(!isEditing); // Inverti lo stato di isEditing
       setButtonText(isEditing ? "Modifica Dati Utente" : "Salva Modifiche"); // Aggiorna il testo del Button in base allo stato di isEditing
       clear()
+      setOpen(false);
       }
     else{
-        alert('Tutti i campi devono essere compilati')
+      setOpen(true);
     }
   }
 
@@ -156,9 +160,13 @@ return (
       ) : (
         <ButtonGroup>
           <Button variant="contained" color="primary" onClick={handleSubmit}>{buttonText}</Button>
-          {isEditing && <Button variant="contained" color="error" onClick={handleClick}>Annulla</Button>}
+          {isEditing && <Button variant="contained" color="error" onClick={()=>{handleClick(); setOpen(false)}}>Annulla</Button>}
         </ButtonGroup>
       )}
+      </Grid>
+
+      <Grid item xs={12} sm={8} sx={{ pt: 5, ml:1  }}>
+        {open && <Alert severity="error" aria-live="assertive" onClose={() => setOpen(false)}>Tutti i campi devono essere compilati</Alert>}
       </Grid>
 
       {(authData?.result?.tickets?.length > 0) && (
