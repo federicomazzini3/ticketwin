@@ -45,12 +45,10 @@ const SignUp = () => {
 
   const handleChange = (e) => {setForm({ ...form, [e.target.name]: e.target.value })};
 
-
-
   const { authData } = useSelector((state) => state.auth);
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container tabIndex={0} aria-label={isSignup ? "Sign up Form" : "Sign in Form"}  component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -77,10 +75,6 @@ const SignUp = () => {
             </>
             )}
           </Grid>
-
-          
-            
-
 
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             { isSignup ? 'Sign Up' : 'Sign In' }

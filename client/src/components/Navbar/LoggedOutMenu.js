@@ -6,8 +6,8 @@ import Login from '@mui/icons-material/Login';
 
 const LoggedOutMenu = ({user}) => {
     if(!user?.result) return (
-        <Box>
-            <MenuItem component={Link} to="/auth">
+        <Box tabIndex={0}>
+            <MenuItem component={Link} to="/auth" >
                 <ListItemIcon>
                     <Login fontSize="small" />
                 </ListItemIcon>
