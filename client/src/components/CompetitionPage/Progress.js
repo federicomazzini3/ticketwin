@@ -1,8 +1,6 @@
 import React from 'react'
 import { Box, LinearProgress, Typography, Grid } from '@mui/material'
 
-
-
 const Progress = ({ maxTicketNumber, ticketSoldNumber }) => {
     const normalise = (value) => ((value) * 100) / (maxTicketNumber);
 

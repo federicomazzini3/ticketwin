@@ -48,10 +48,6 @@ export const createCompetition = async (req, res) => {
 
     var millisToDeadline = deadline - now
     
-    console.log("now: " + now.toString())
-    console.log("deadline competizione creata: " + deadline.toString())
-    console.log(millisToDeadline)
-    
     setTimeout(() => {
         drawCompetition(newCompetition._id)
     }, millisToDeadline);

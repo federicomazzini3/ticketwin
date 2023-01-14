@@ -23,7 +23,6 @@ const Footer = ({ mode }) => {
 
                 <Grid container direction="row" justifyContent="space-between" alignItems="center">
 
-
                     <Grid item xs={4}>
                         <IconButton aria-label={"Palette Icon"} onClick={() => { }}>
                             <ColorLensIcon></ColorLensIcon>

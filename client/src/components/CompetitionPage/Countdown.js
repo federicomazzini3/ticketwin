@@ -33,21 +33,6 @@ const CountdownComponent = ({deadline, terminated, setTerminated}) => {
     )
   }
 
-  /*if((countDown < 0) && (!updatedCompetition)) {
-    competition.status = "terminated";
-    const [ticketsUpdated, ticketsByOwners] = getWinnerTicket(competition.tickets)
-    competition.tickets = ticketsUpdated;
-    dispatch(updateCompetition(competition._id, competition));
-    /*.then(() => {
-      for (const owner in ticketsByOwners){   
-      dispatch(updateUser(owner, ticketsByOwners[owner]));    
-      } 
-      //history.push('/')
-    });*/
-    /*console.log("Qui abbiamo fatto Aggiornamento della Competizione e dell'User: ", ticketsUpdated);
-    setUpdatedCompetition(true)
-  }*/
-
   return (
         <Grid tabIndex={0} aria-label={`Competition countdown: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`} container item xs={12} sx={{ mt: 10, textAlign: 'center' }}>
           <Grid item xs={3}>
@@ -85,29 +70,5 @@ const CountdownComponent = ({deadline, terminated, setTerminated}) => {
   
     return [days, hours, minutes, seconds];
   };
-
-  /*const getWinnerTicket = (tickets) => {
-    let randomIndex = Math.floor(Math.random() * tickets.length);
-    let winnerTicket = tickets[randomIndex];
-    winnerTicket.status = "win";
-
-    let loserTickets = tickets.filter(ticket => ticket !== winnerTicket);
-    loserTickets.forEach(ticket => ticket.status = "lose");
-
-    let updatedTickets = [winnerTicket, ...loserTickets];
-    
-    let ticketsByOwner = {};
-
-    updatedTickets.forEach((ticket) => {
-      if (!ticketsByOwner[ticket.owner]) {
-        ticketsByOwner[ticket.owner] = [ticket];
-      } else {
-        ticketsByOwner[ticket.owner].push(ticket);
-      }
-    });
-
-    console.log("ticketbyowner: ", ticketsByOwner);
-    return [updatedTickets, ticketsByOwner];
-  };*/
 
 export default CountdownComponent
