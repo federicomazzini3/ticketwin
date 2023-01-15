@@ -19,8 +19,8 @@ const CompetitionsPage = () => {
         <Container sx={{ py: 5 }} maxWidth="md">
             <SearchBar></SearchBar>
             <Competitions></Competitions>
-            <Paper elevation={6} sx={{ borderRadius: 4, mt: 2, p: 2 }}>
-                <Pagination  page={page}/>
+            <Paper tabIndex={0} aria-label={`Pages Navigator`} elevation={6} sx={{ borderRadius: 4, mt: 2, p: 2 }}>
+                <Pagination page={page}/>
             </Paper>
         </Container>
     )

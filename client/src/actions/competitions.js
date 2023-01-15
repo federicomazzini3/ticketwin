@@ -47,10 +47,9 @@ export const createCompetition = (competition, onSuccess, onFailure) => async(di
 export const updateCompetition = (id, competition) => async(dispatch) => {
     try {
         const {data} = await api.updateCompetition(id, competition);
-
         dispatch({ type: UPDATE, payload: data})
     } catch (err) {
-        console.log(err.message);
+        console.log(err);
     }
 }
 

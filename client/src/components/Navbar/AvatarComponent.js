@@ -26,6 +26,7 @@ const AvatarComponent = ({user, logout}) => {
                 sx={{ ml: 2 }}
                 aria-controls={open ? 'account-menu' : undefined}
                 aria-haspopup="true"
+                aria-label={"Account menu"}
                 aria-expanded={open ? 'true' : undefined}>
 
                 {user?.result && (

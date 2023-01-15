@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Competition from '../models/competition.js';
+import mongoose from "mongoose";
 
 import User from '../models/user.js';
 
@@ -73,6 +74,23 @@ export const updateUserTickets = async (competition, tickets) => {
 
         await User.findByIdAndUpdate(tickets[0].owner, user, {new: true});
     } catch(err) {
+        console.log(err);
+    }
+}
+
+export const updateUser = async (req, res) => {
+    const { id } = req.params;
+    try{
+        const user = req.body;
+        const hashedPassword = await bcrypt.hash(user.password, 12);
+        user.password = hashedPassword;
+
+        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No user with that id');
+            
+        const updatedUser = await User.findByIdAndUpdate(id, user, {new: true});
+
+        res.json({updatedUser})         
+    }catch(err){
         console.log(err);
     }
 }

@@ -23,14 +23,13 @@ const Footer = ({ mode }) => {
 
                 <Grid container direction="row" justifyContent="space-between" alignItems="center">
 
-
                     <Grid item xs={4}>
-                        <IconButton onClick={() => { }}>
+                        <IconButton aria-label={"Palette Icon"} onClick={() => { }}>
                             <ColorLensIcon></ColorLensIcon>
                         </IconButton>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid tabIndex={0} aria-label={"Copyright TicketWin"} item xs={4}>
                         <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
                             {'Copyright © '}
                             TicketWin
@@ -40,7 +39,7 @@ const Footer = ({ mode }) => {
                     </Grid>
 
                     <Grid item xs={4} textAlign={'right'}>
-                        <IconButton onClick={() => mode === "light" ? dispatch(setDarkMode(dispatch)) : dispatch(setLightMode(dispatch))}>
+                        <IconButton aria-label={"Change Theme"} onClick={() => mode === "light" ? dispatch(setDarkMode(dispatch)) : dispatch(setLightMode(dispatch))}>
                             {mode === "light" ? <DarkModeIcon></DarkModeIcon> : <LightModeIcon></LightModeIcon>}
                         </IconButton>
                     </Grid>

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Competition from "../models/competition.js";
 import {status, ongoing, win, lose, terminated, pending} from "../constants/constants.js";
+import { drawCompetition } from "../middleware/draw.js"; 
 import { updateUserTickets } from "./user.js";
 
 export const getCompetitions = async (req, res) => {
@@ -10,7 +11,7 @@ export const getCompetitions = async (req, res) => {
         
         const LIMIT = 8; //num of competitions to retrieve
         const startIndex = (Number(page) - 1) * LIMIT; //the index to start the find()
-        const total = await Competition.countDocuments({}); //number of total documents in the db
+        const total = await Competition.countDocuments({status:ongoing}); //number of total documents in the db
 
         const competitions = await Competition.find({status:ongoing}).limit(LIMIT).skip(startIndex); //query, limit to LIMIT and skip the first LIMIT * page documents
 
@@ -41,6 +42,16 @@ export const getCompetitionsBySearch = async (req, res) => {
 export const createCompetition = async (req, res) => {
     const competition = req.body;
     const newCompetition = new Competition(competition)
+
+    var now = new Date();
+    var deadline = newCompetition.deadline
+
+    var millisToDeadline = deadline - now
+    
+    setTimeout(() => {
+        drawCompetition(newCompetition._id)
+    }, millisToDeadline);
+
     try{
         await newCompetition.save();
         res.status(201).json(newCompetition);

@@ -66,7 +66,7 @@ export default function Checkout() {
   };
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+    <Container tabIndex={0} aria-label={"Checkout"} component="main" maxWidth="sm" sx={{ mb: 4 }}>
       <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
         <Typography component="h1" variant="h4" align="center">
           Checkout
@@ -81,7 +81,7 @@ export default function Checkout() {
         </Stepper> )}
         { cart && cart.length === 0 && activeStep !== steps.length && (
           <React.Fragment>
-            <Typography variant="h5" gutterBottom>
+            <Typography tabIndex={0} aria-label={"No tickets in cart. Go back to the HomePage"} variant="h5" gutterBottom>
               No tickets in cart
             </Typography>
             <Button variant='text' onClick={() => history.push('/')}>Return to home</Button>
@@ -89,7 +89,7 @@ export default function Checkout() {
         )}
         { activeStep === steps.length && (
           <React.Fragment>
-            <Typography variant="h5" gutterBottom>
+            <Typography tabIndex={0} aria-label={"Thank you for your order. Now you can go back to the HomePage"} variant="h5" gutterBottom>
               Thank you for your order.
             </Typography>
             <Button variant='text' onClick={() => history.push('/')}>Return to home</Button>

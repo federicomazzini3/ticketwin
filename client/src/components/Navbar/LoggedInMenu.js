@@ -10,14 +10,14 @@ const LoggedInMenu = ({user, logout}) => {
     
     if(user?.result) return (
         <Box>
-            <MenuItem component={Link} to="/auth">
+            <MenuItem tabIndex={0} component={Link} to="/auth">
                 <ListItemIcon>
                     <Avatar className={classes.purple} sx={{ width: 32, height: 32 }} alt={user?.result.name} src={user?.result.imageUrl}> {user?.result.name.charAt(0)}</Avatar>
                 </ListItemIcon>
                 My account
             </MenuItem>
         <Divider />
-            <MenuItem onClick={logout}>
+            <MenuItem tabIndex={0} onClick={logout}>
                 <ListItemIcon>
                     <Logout fontSize="small" />
                 </ListItemIcon>
