@@ -11,7 +11,7 @@ const Home = () => {
               Ticket Win
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Un prodotto esclusivo, a un prezzo esclusivo
+              Exlusive product, exclusive price
             </Typography>
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center" >
               <Button variant="contained" component={Link} onClick={() => history.push('/competitions')}>Explore the competitions</Button>

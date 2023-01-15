@@ -9,6 +9,9 @@
 
 - Start client application `npm start`
 
+### Extension for blind
+- Download the [Screen Reader](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn?hl=it)
+
 ## Server
 - Open a new terminal
 

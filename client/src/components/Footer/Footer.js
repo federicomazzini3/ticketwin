@@ -23,11 +23,7 @@ const Footer = ({ mode }) => {
 
                 <Grid container direction="row" justifyContent="space-between" alignItems="center">
 
-                    <Grid item xs={4}>
-                        <IconButton aria-label={"Palette Icon"} onClick={() => { }}>
-                            <ColorLensIcon></ColorLensIcon>
-                        </IconButton>
-                    </Grid>
+                    <Grid item xs={4}> </Grid>
 
                     <Grid tabIndex={0} aria-label={"Copyright TicketWin"} item xs={4}>
                         <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
